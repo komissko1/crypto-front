@@ -1,0 +1,97 @@
+.popupMenu {
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, .3);
+  visibility: hidden;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s ease-in-out;
+}
+
+.popupMenu__container {
+  padding: 160px 0 92px;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+  max-width: 520px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background: #FFFFFF;
+}
+
+.popupMenu_opened {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+}
+
+.popupMenu__close-button {
+  margin: 0;
+  padding: 0;
+  width: 22px;
+  max-height: 22px;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  cursor: pointer;
+}
+
+.popupMenu__items {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  list-style-type: none;
+  gap: 28px;
+}
+
+.popupMenu__link{
+  text-decoration: none;
+  color: black;
+}
+
+.popupMenu__items li{
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+}
+
+.popupMenu__account {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  display: flex;
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+  text-decoration: none;
+  color: black;
+}
+
+.popupMenu__account-pic {
+  width: 11.5px;
+  margin-left: 17px;
+  padding: 7px;
+  background: #F9F9F9;
+  border-radius: 4px;
+}
+
+
+
+

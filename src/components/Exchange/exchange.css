@@ -1,0 +1,12 @@
+.exchange {
+  width: 100%;
+  min-width: 320px;
+  padding: 1rem;
+  display: flex;
+  flex: auto;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+

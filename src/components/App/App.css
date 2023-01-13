@@ -1,0 +1,17 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Inter, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  position: relative;
+  box-sizing: border-box;
+  color: rgb(255,255,255);
+}
+
+

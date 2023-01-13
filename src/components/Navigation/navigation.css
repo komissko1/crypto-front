@@ -1,0 +1,37 @@
+.navBar {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: fit-content;
+  list-style-type: none;
+  gap: 2rem;
+  font-size: var(--paragraph-font-size);
+}
+
+.navBar_small {
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.navBar_orange {
+  gap: 1rem;
+  font-size: 1rem;
+  color: var(--brand-yellow);
+}
+
+.navBar__link{
+  text-decoration: none;
+  color: inherit;
+  transition: opacity .3s ease-in-out;
+}
+
+.navBar__link_active{
+  font-weight: var(--semibold-font-weight);
+  text-decoration: underline;
+}
+
+.navBar li{
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+}
+
