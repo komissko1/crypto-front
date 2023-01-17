@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Tickers from "../Tickers/Tickers";
 import { landingStats } from "../../utils/content";
 
 function Landing() {
@@ -24,19 +26,13 @@ function Landing() {
         </ul>
       </article>
       <article className="landing__currencies">
+        <div className="landing__currency-title">
         <h2 className="landing__subtitle">
           Trade over 200 currency pairs online. Transparent rates. Low fees.
         </h2>
-        <div className="landing__currency-screen">
-          <div className="landing__cirrency-grid">
-            <p>asgseg</p>
-            <p>asgseg</p>
-            <p>asgsesrgsgsg</p>
-            <p>asgseg</p>
-            <p>asgseg</p>
-            <p>asgseg</p>
-          </div>
+        <Link to="/register" className = "landing__register-link link-effect">Register now</Link>
         </div>
+        <Tickers />
       </article>
     </section>
   );

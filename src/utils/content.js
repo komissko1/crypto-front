@@ -107,3 +107,36 @@ export const alertText = {
   profileUpdated: "User's data updated",
   userExists: "User name already exists"
 }
+
+// Active tickers for the Landing page
+export const activeTickers = [
+  "usdteur",
+  "btcusdt",
+  "ethusdt",
+  "xrpusdt",
+  "shibusd",
+  "dogeusd",
+];
+
+// Column data for Prices page main grid
+export const priceColumns = [
+{
+  name: "Trading Pair",
+  apiReferenceName: "pair"
+},
+// {
+//   name: "Sell",
+//   apiReferenceName: {ask}
+// },
+// {
+//   name: "Buy",
+//   apiReferenceName: {bid}
+// },
+// {
+//   name: "Last price",
+//   apiReferenceName: {last}
+// }
+]
+
+
+// last pair percent_change_24 timestamp volume

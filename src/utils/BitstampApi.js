@@ -1,14 +1,12 @@
 const apiConfig = {
   baseUrl: 'http://localhost:3002/bitstamp/',
-  targetUrl: 'https://www.bitstamp.net/api/v2/ticker/',
-  tickers: ["usdteur", "btcusdt", "ethusdt", "xrpusdt", "shibusd", "dogeusd"]
+  ticker: ""
 };
 
 class BitstampApi {
   constructor(apiConfig) {
     this._baseUrl = apiConfig.baseUrl;
-    this._targetUrl = apiConfig.targetUrl;
-    this._tickers = apiConfig.tickers;
+    this._ticker = apiConfig.ticker;
   }
 
   _checkResponse(res) {
@@ -19,7 +17,7 @@ class BitstampApi {
   }
 
   getTickerData() {
-    return fetch(this._baseUrl, {
+    return fetch(this._baseUrl+this._ticker, {
       headers: {
       "Content-Type": "application/json"},
     }).then(this._checkResponse);

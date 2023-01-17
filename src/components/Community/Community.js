@@ -10,7 +10,7 @@ function Community() {
         <span className="community__subtitle community__subtitle_bold">
           crypto-gurus
         </span>
-        ,&ensp;and&ensp;
+        &ensp;and&ensp;
         <span className="community__subtitle community__subtitle_bold">
           traders
         </span>

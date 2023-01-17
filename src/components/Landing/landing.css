@@ -28,7 +28,7 @@
 
 .landing__title {
   margin: 0;
-  padding-top: 150px;
+  padding-top: 6rem;
   font-size: var(--title-font-size);
   font-weight: var(--highlighted-font-weight);
   text-transform: uppercase;
@@ -80,15 +80,24 @@
   gap: 2rem;
 }
 
-.landing__currency-screen {
-  min-width: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  padding: 2rem;
-  border-radius: 24px;
-  box-shadow: rgba(255, 255, 255, 0.8) 0px 0px 10px inset;
+.landing__currency-title {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0px;
+  gap: 2rem;
 }
 
-.landing__cirrency-grid {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
+.landing__register-link {
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  color: black;
+  border-style: none;
+  text-decoration: none;
+  background:var(--brand-yellow);
+  font-size: var(--paragraph-font-size);
+  font-weight: var(--semibold-font-weight);
+  border-radius: 3px;
+  align-self: center;
+  transition: opacity .3s ease-in-out;
 }
