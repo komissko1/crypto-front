@@ -1,50 +1,60 @@
 import React from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Navigation from "../Navigation/Navigation";
+import { mainNavBar, accountNavBar } from "../../utils/content";
 import closeIcon from "../../images/closeIcon.svg";
-import accountPath from "../../images/account.svg";
 
-function PopupMenu({ isOpen, onClose }) {
+function PopupMenu({ isOpen, onClose, loggedIn }) {
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const closeByEscape = e => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", closeByEscape);
+    return () => document.removeEventListener("keydown", closeByEscape);
+  }, [isOpen, onClose]);
 
+  const handleOverlay = e => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
   return (
-    <dir className={`popupMenu ${isOpen ? "popupMenu_opened" : ""}`} onClick={handleOverlay}>
+    <section
+      className={`popupMenu ${isOpen ? "popupMenu_opened" : ""}`}
+      onClick={handleOverlay}
+    >
       <dir className="popupMenu__container">
         <img
           className="popupMenu__close-button link-effect"
           src={closeIcon}
-          alt="Закрыть"
+          alt="Close"
           onClick={onClose}
         />
-        <>
-          <ul className="popupMenu__items">
-            <li className="link-effect">
-              <Link to="/" className={"popupMenu__link"} onClick={onClose}>
-                Главная
-              </Link>
-            </li>
-            <li className="link-effect">
-              <Link to="/movies" className={"popupMenu__link"} onClick={onClose}>
-                Фильмы
-              </Link>
-            </li>
-            <li className="link-effect">
-              <Link to="/saved-movies" className={"popupMenu__link"} onClick={onClose}>
-                Сохраненные фильмы
-              </Link>
-            </li>
-          </ul>
-          <Link to="/profile" className="popupMenu__account link-effect" onClick={onClose}>
-            Аккаунт
-            <img
-              className="popupMenu__account-pic"
-              src={accountPath}
-              alt="Профиль"
-            />
+
+        <Navigation mode="vertical-small" content={mainNavBar}></Navigation>
+
+        {loggedIn ? (
+          <div className="popupMenu__account">
+            <p className="popupMenu__title">Account</p>
+            <Navigation
+              mode="vertical-small"
+              content={accountNavBar}
+            ></Navigation>
+            <Link to="" className="popupMenu__item link-effect">
+              Logout
+            </Link>
+          </div>
+        ) : (
+          <Link to="/login" className="popupMenu__item link-effect">
+            Login
           </Link>
-        </>
+        )}
       </dir>
-    </dir>
+    </section>
   );
 }
 

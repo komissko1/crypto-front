@@ -9,8 +9,8 @@
   --form-background: #0d111c;
   --input-background: #131a2a;
   --input-alert:#98a1c0;
-  --basic-grey: #b8c0dc3d;
-  --alt-grey: #ffffff99;
+  --basic-grey: hsla(227, 34%, 79%, 0.239);
+  --alt-grey: hsla(0, 0%, 100%, 0.6);
   --button-active: #4c82fb3d;
   --button-inactive: #293249;
   --brand-yellow: #ff8000;
@@ -27,6 +27,7 @@
 @import url(./components/App/App.css);
 @import url(./components/Navigation/navigation.css);
 @import url(./components/Header/header.css);
+@import url(./components/PopupMenu/popupMenu.css);
 @import url(./components/Footer/footer.css);
 @import url(./components/Main/main.css);
 @import url(./components/Prices/prices.css);

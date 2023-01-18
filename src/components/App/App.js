@@ -8,13 +8,23 @@ import Exchange from "../Exchange/Exchange";
 import Wallet from "../Wallet/Wallet";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import PopupMenu from "../PopupMenu/PopupMenu";
 import binanceApi from "../../utils/BinanceApi";
 
 function App() {
+  const [popupMenuState, setPopupMenuState] = React.useState(false);
+
+  function handleMenuClick() {
+    setPopupMenuState(!popupMenuState);
+  }
+
+  function closePopup() {
+    setPopupMenuState(!popupMenuState);
+  }
 
   return (
     <div className="app">
-      <Header loggedIn={true} />
+      <Header loggedIn={true} onClick={handleMenuClick}/>
       <Routes>
         <Route
           path="/"
@@ -62,6 +72,7 @@ function App() {
         /> */}
       </Routes>
       <Footer />
+      <PopupMenu loggedIn={true} isOpen={popupMenuState} onClose={closePopup} />
       {/* <PopupMenu/> */}
     </div>
   );

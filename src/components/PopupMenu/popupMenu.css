@@ -1,34 +1,27 @@
 .popupMenu {
   margin: 0;
-  padding: 0;
-  background: rgba(0, 0, 0, .3);
+  padding: 3rem;
   visibility: hidden;
   display: flex;
-  justify-content: flex-end;
   position: fixed;
   top: 0;
   right: 0;
-  left: 0;
-  bottom: 0;
+  transition: visibility 0.5s, opacity 0.5s ease-in-out;
+  border: 1px solid var(--alt-grey);
+  background: var(--form-background);
   opacity: 0;
-  transition: visibility 0.3s, opacity 0.3s ease-in-out;
 }
 
 .popupMenu__container {
-  padding: 160px 0 92px;
+  padding: 2rem 0 0;
   margin: 0;
-  height: 100vh;
-  width: 100%;
-  max-width: 520px;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
+  width: max-content;
+  font-weight: var(--semibold-font-weight);
+  font-size: var(--paragraph-font-size);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  background: #FFFFFF;
 }
 
 .popupMenu_opened {
@@ -40,58 +33,36 @@
 .popupMenu__close-button {
   margin: 0;
   padding: 0;
-  width: 22px;
-  max-height: 22px;
+  width: 2rem;
   object-fit: cover;
-  opacity: 1;
-  transition: opacity .5s ease-in-out;
   position: absolute;
   top: 22px;
   right: 22px;
   cursor: pointer;
 }
 
-.popupMenu__items {
-  padding: 0;
-  margin: 0;
+.popupMenu__account{
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
+  text-align: center;
   align-items: center;
-  width: 100%;
-  list-style-type: none;
-  gap: 28px;
+  border-top: 1px solid var(--alt-grey);
 }
 
-.popupMenu__link{
+.popupMenu__title{
+  margin: 0;
+  padding: 1rem 0;
+  font-size: var(--paragraph-font-size);
+  color: var(--brand-yellow);
+}
+
+.popupMenu__item{
+  margin: 0;
+  padding: 1rem 0;
+  font-size: 1rem;
+  color: var(--brand-yellow);
   text-decoration: none;
-  color: black;
 }
-
-.popupMenu__items li{
-  opacity: 1;
-  transition: opacity .5s ease-in-out;
-}
-
-.popupMenu__account {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  align-items: center;
-  display: flex;
-  opacity: 1;
-  transition: opacity .5s ease-in-out;
-  text-decoration: none;
-  color: black;
-}
-
-.popupMenu__account-pic {
-  width: 11.5px;
-  margin-left: 17px;
-  padding: 7px;
-  background: #F9F9F9;
-  border-radius: 4px;
-}
-
-
 
 

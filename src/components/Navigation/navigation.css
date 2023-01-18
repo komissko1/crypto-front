@@ -19,6 +19,12 @@
   color: var(--brand-yellow);
 }
 
+.navBar_vertical-small {
+  gap: 1rem;
+  font-size: 1rem;
+  flex-direction: column;
+}
+
 .navBar__link{
   text-decoration: none;
   color: inherit;

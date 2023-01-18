@@ -28,9 +28,10 @@ function Header(props) {
       <div className="header__links-container">
         {windowSize <= 768 ? (
           <img
+            onClick={props.onClick}
             className="header__navBar-button link-effect"
             src={navButton}
-            alt="Меню"
+            alt="Menu"
           />
         ) : (
           <>
