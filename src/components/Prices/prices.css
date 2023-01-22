@@ -1,10 +1,12 @@
 .prices {
   width: 100%;
+  padding: 0 4rem;
   display: flex;
+  flex: auto;
   flex-direction: column;
-  padding-top: 2rem;
   color: white;
   text-align: right;
+  box-sizing: border-box;
 }
 
 .prices__container {

@@ -7,12 +7,16 @@ import Prices from "../Prices/Prices";
 import Exchange from "../Exchange/Exchange";
 import Wallet from "../Wallet/Wallet";
 import Login from "../Login/Login";
-import Register from "../Register/Register";
+import Signup from "../Signup/Signup";
 import PopupMenu from "../PopupMenu/PopupMenu";
+import PageNotFound from "../PageNotFound/PageNotFound";
 import binanceApi from "../../utils/BinanceApi";
 
 function App() {
   const [popupMenuState, setPopupMenuState] = React.useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   function handleMenuClick() {
     setPopupMenuState(!popupMenuState);
@@ -24,7 +28,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header loggedIn={true} onClick={handleMenuClick}/>
+      <Header loggedIn={false} onClick={handleMenuClick}/>
       <Routes>
         <Route
           path="/"
@@ -66,13 +70,21 @@ function App() {
             </>
           }
         />
-        {/* <Route
+        <Route
+          path="/signup"
+          element={
+            <>
+              <Signup />
+            </>
+          }
+        />
+        <Route
           path="*"
           element={<PageNotFound onReturn={() => navigate(-1)} />}
-        /> */}
+        />
       </Routes>
       <Footer />
-      <PopupMenu loggedIn={true} isOpen={popupMenuState} onClose={closePopup} />
+      <PopupMenu loggedIn={false} isOpen={popupMenuState} onClose={closePopup} />
       {/* <PopupMenu/> */}
     </div>
   );

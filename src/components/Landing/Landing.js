@@ -12,7 +12,7 @@ function Landing() {
           <span className="landing__title landing__title_light">project</span>
         </h1>
         <h2 className="landing__subtitle">
-          Trade together with crypto-guru and don't cry.
+          Trade together with crypto-gurus and don't cry.
         </h2>
         <ul className="landing__stats">
           {landingStats.map(item => (

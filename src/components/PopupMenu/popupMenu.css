@@ -10,6 +10,7 @@
   border: 1px solid var(--alt-grey);
   background: var(--form-background);
   opacity: 0;
+  z-index: 10;
 }
 
 .popupMenu__container {
@@ -27,7 +28,6 @@
 .popupMenu_opened {
   visibility: visible;
   opacity: 1;
-  z-index: 10;
 }
 
 .popupMenu__close-button {

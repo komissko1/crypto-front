@@ -26,7 +26,7 @@ function Prices() {
   return (
     <section className="prices">
       <p>
-        Last updated: {updateDate}
+      Last updated: {priceData === {} ? updateDate : "awaiting update ..."}
       </p>
       <div className="prices__container">
         <ul className="prices__line prices__line_white-bold-centered">

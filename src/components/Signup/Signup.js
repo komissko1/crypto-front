@@ -3,21 +3,25 @@ import { Link } from "react-router-dom";
 import Form from "../Form/Form";
 import { alertText } from "../../utils/content";
 
-function Login(props) {
+function Signup(props) {
   const [validatedFields, setValidatedFields] = React.useState({
+    name: true,
     email: true,
     password: true,
   });
   const [isFormValid, setIsFormValid] = React.useState(false);
+  const nameRef = React.useRef();
   const emailRef = React.useRef();
   const passwordRef = React.useRef();
 
   React.useEffect(() => {
+    nameRef.current.value = "";
     emailRef.current.value = "";
     passwordRef.current.value = "";
   }, []);
 
   const handleFieldChange = (e) => {
+    console.log(validatedFields);
     const validatedKeyPare = { [e.target.id]: e.target.checkValidity() };
     setValidatedFields({ ...validatedFields, ...validatedKeyPare });
     setIsFormValid(e.target.closest("form").checkValidity());
@@ -26,7 +30,8 @@ function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid) {
-      props.onLogin({
+      props.onSignup({
+        name: nameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
@@ -34,13 +39,34 @@ function Login(props) {
   };
 
   return (
-    <div className="login">
-      <p className="login__title">Welcome!</p>
+    <div className="signup">
+      <p className="signup__title">Register and trade!</p>
       <Form
-        buttonText="Login"
+        buttonText="Sign up"
         onSubmit={handleSubmit}
         isFormValid={isFormValid}
       >
+        <label className="form__inputs-box">
+          <input
+            className="form__input"
+            type="text"
+            id="name"
+            minLength="3"
+            maxLength="50"
+            placeholder="Username"
+            required
+            ref={nameRef}
+            onChange={handleFieldChange}
+          />
+          <span
+            className={`form__input-alert ${
+              validatedFields.name ? "" : "form__input-alert_pink"
+            }`}
+            id="name-alert"
+          >
+            {alertText.name}
+          </span>
+        </label >
         <label className="form__inputs-box">
           <input
             className="form__input"
@@ -50,12 +76,10 @@ function Login(props) {
             required
             ref={emailRef}
             onChange={handleFieldChange}
-            pattern="[a-zA-Z0-9._%+-]+\x40[a-zA-Z0-9.-]+\x2E[a-zA-Z]{2,}"
-
           />
           <span
             className={`form__input-alert ${
-              validatedFields.email ? "" : "form__input-alert_pink"
+              validatedFields.password ? "" : "form__input-alert_pink"
             }`}
             id="email-alert"
           >
@@ -86,20 +110,20 @@ function Login(props) {
         </label>
         <p
           className={`form__submit-alert ${
-            props.onLoginError ? "" : "form__submit-alert"
+            props.onSignupError ? "form__submit-alert" : ""
           }`}
         >
-          {alertText.authorizationError}
+          {alertText.serverError}
         </p>
       </Form>
       <p className="form__bottom-text">
-        Not registered?&nbsp;&#8594;&nbsp;
-        <Link to="/signup" className="form__bottom-link link-effect">
-          Registration
+        Already registered?&nbsp;
+        <Link to="/login" className="form__bottom-link link-effect">
+          Login
         </Link>
       </p>
     </div>
   );
 }
 
-export default Login;
+export default Signup;

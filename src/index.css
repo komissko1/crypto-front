@@ -25,19 +25,22 @@
 @import url(./vendor/fonts.css);
 
 @import url(./components/App/App.css);
-@import url(./components/Navigation/navigation.css);
+@import url(./components/Login/login.css);
+@import url(./components/Signup/signup.css);
 @import url(./components/Header/header.css);
-@import url(./components/PopupMenu/popupMenu.css);
 @import url(./components/Footer/footer.css);
 @import url(./components/Main/main.css);
+@import url(./components/Landing/landing.css);
+@import url(./components/Community/community.css);
 @import url(./components/Prices/prices.css);
 @import url(./components/Exchange/exchange.css);
-@import url(./components/Wallet/wallet.css);
-@import url(./components/Landing/landing.css);
-@import url(./components//Tickers/tickers.css);
-@import url(./components/Form/form.css);
-@import url(./components/Login/login.css);
 @import url(./components/TradeForm/tradeForm.css);
-@import url(./components/Community/community.css);
+@import url(./components/Wallet/wallet.css);
+
+@import url(./components/Navigation/navigation.css);
+@import url(./components/Tickers/tickers.css);
+@import url(./components/Form/form.css);
+@import url(./components/PopupMenu/popupMenu.css);
+@import url(./components/PageNotFound/pageNotFound.css);
 
 @import url(./utils/link-effect.css);
