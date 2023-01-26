@@ -75,6 +75,10 @@ export const mainNavBar = [
 
 export const accountNavBar = [
   {
+    link: "/profile",
+    name: "Profile"
+  },
+  {
     link: "/wallet",
     name: "Wallet&Stats"
   }
@@ -118,25 +122,3 @@ export const activeTickers = [
   "dogeusd",
 ];
 
-// Column data for Prices page main grid
-export const priceColumns = [
-{
-  name: "Trading Pair",
-  apiReferenceName: "pair"
-},
-// {
-//   name: "Sell",
-//   apiReferenceName: {ask}
-// },
-// {
-//   name: "Buy",
-//   apiReferenceName: {bid}
-// },
-// {
-//   name: "Last price",
-//   apiReferenceName: {last}
-// }
-]
-
-
-// last pair percent_change_24 timestamp volume

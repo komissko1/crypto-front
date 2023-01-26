@@ -8,7 +8,7 @@ function Form(props) {
       <button
         type="submit"
         className={`form__submit ${
-          props.isFormValid ? "form__submit_active": "form__submit_active link-effect"
+          props.isFormValid ? "form__submit_active link-effect" : ""
         }`}
       >
         {props.buttonText}

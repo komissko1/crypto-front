@@ -39,7 +39,7 @@ function Header(props) {
             {props.loggedIn ? (
               <>
                 <Navigation mode="orange" content={accountNavBar}></Navigation>
-                <Link to="" className="header__login-link link-effect">
+                <Link to="/" className="header__login-link link-effect" onClick={props.onLogout}>
                   Logout
                 </Link>
               </>

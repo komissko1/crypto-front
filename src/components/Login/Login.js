@@ -51,7 +51,6 @@ function Login(props) {
             ref={emailRef}
             onChange={handleFieldChange}
             pattern="[a-zA-Z0-9._%+-]+\x40[a-zA-Z0-9.-]+\x2E[a-zA-Z]{2,}"
-
           />
           <span
             className={`form__input-alert ${
@@ -86,7 +85,7 @@ function Login(props) {
         </label>
         <p
           className={`form__submit-alert ${
-            props.onLoginError ? "" : "form__submit-alert"
+            props.onLoginError ? "form__submit-alert_active" : ""
           }`}
         >
           {alertText.authorizationError}

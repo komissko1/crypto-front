@@ -21,7 +21,6 @@ function Signup(props) {
   }, []);
 
   const handleFieldChange = (e) => {
-    console.log(validatedFields);
     const validatedKeyPare = { [e.target.id]: e.target.checkValidity() };
     setValidatedFields({ ...validatedFields, ...validatedKeyPare });
     setIsFormValid(e.target.closest("form").checkValidity());
@@ -75,11 +74,12 @@ function Signup(props) {
             placeholder="E-mail"
             required
             ref={emailRef}
+            pattern='[a-zA-Z0-9._%+-]+\x40[a-zA-Z0-9.-]+\x2E[a-zA-Z]{2,}'
             onChange={handleFieldChange}
           />
           <span
             className={`form__input-alert ${
-              validatedFields.password ? "" : "form__input-alert_pink"
+              validatedFields.email ? "" : "form__input-alert_pink"
             }`}
             id="email-alert"
           >
@@ -110,7 +110,7 @@ function Signup(props) {
         </label>
         <p
           className={`form__submit-alert ${
-            props.onSignupError ? "form__submit-alert" : ""
+            props.onSignupError ? "form__submit-alert_active" : ""
           }`}
         >
           {alertText.serverError}

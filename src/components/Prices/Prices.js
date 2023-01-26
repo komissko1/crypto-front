@@ -16,17 +16,17 @@ function Prices() {
           setUpdateDate(Date());
         })
         .catch(() => console.log("error"));
-    }
+      }
 
-    getPriceData();
-    const timer = setInterval(() => getPriceData(), 30000);
-    return () => clearInterval(timer);
-  }, []);
+      getPriceData();
+      const timer = setInterval(() => getPriceData(), 30000);
+      return () => clearInterval(timer);
+    }, []);
 
-  return (
+    return (
     <section className="prices">
       <p>
-      Last updated: {priceData === {} ? updateDate : "awaiting update ..."}
+      Last updated: {JSON.stringify(priceData) === '{}' ? "awaiting update ..." : updateDate }
       </p>
       <div className="prices__container">
         <ul className="prices__line prices__line_white-bold-centered">

@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import Navigation from "../Navigation/Navigation";
 import { mainNavBar, accountNavBar } from "../../utils/content";
 import closeIcon from "../../images/closeIcon.svg";
 
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
 function PopupMenu({ isOpen, onClose, loggedIn }) {
+
+  const currentUser = React.useContext(CurrentUserContext);
+
+
   React.useEffect(() => {
     if (!isOpen) return;
     const closeByEscape = e => {
@@ -39,7 +46,7 @@ function PopupMenu({ isOpen, onClose, loggedIn }) {
 
         {loggedIn ? (
           <div className="popupMenu__account">
-            <p className="popupMenu__title">Account</p>
+            <p className="popupMenu__title">Hello, {currentUser.name}</p>
             <Navigation
               mode="vertical-small"
               content={accountNavBar}

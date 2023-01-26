@@ -30,7 +30,7 @@ function Landing() {
         <h2 className="landing__subtitle">
           Trade over 200 currency pairs online. Transparent rates. Low fees.
         </h2>
-        <Link to="/register" className = "landing__register-link link-effect">Register now</Link>
+        <Link to="/signup" className = "landing__register-link link-effect">Register now</Link>
         </div>
         <Tickers />
       </article>
