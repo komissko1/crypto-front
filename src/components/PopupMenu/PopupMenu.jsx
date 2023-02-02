@@ -11,7 +11,6 @@ function PopupMenu({ isOpen, onClose, loggedIn }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
-
   React.useEffect(() => {
     if (!isOpen) return;
     const closeByEscape = e => {

@@ -1,13 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
+import Loader from "../Loader/Loader";
 import { activeTickers } from "../../utils/content";
 import bitstampApi from "../../utils/BitstampApi";
 
-function Tickers() {
+function Tickers(props) {
   const [tickersData, setTickersData] = React.useState({});
+  const [isRetrievingData, setIsRetrievingData] = React.useState(false);
 
   React.useEffect(() => {
     function getLandingtickers() {
+      const loaderTimer = setTimeout(() => setIsRetrievingData(true), 1000);
       return bitstampApi
         .getTickerData()
         .then(data => {
@@ -17,57 +21,57 @@ function Tickers() {
             );
           });
           setTickersData(data);
+          clearTimeout(loaderTimer);
+          setIsRetrievingData(false);
         })
         .catch(() => console.log("error"));
     }
 
     getLandingtickers();
-    const timer = setInterval(() => getLandingtickers(), 5000);
-    return () => clearInterval(timer);
+    const renewData = setInterval(() => getLandingtickers(), 5000);
+    return () => clearInterval(renewData);
   }, []);
 
   return (
     <div className="tickers__container">
       <ul className="tickers__line tickers__line_white-bold-centered">
-        <li className="tickers__data">
-          Trading Pair
-        </li>
-        <li className="tickers__data">
-          Last transaction price
-        </li>
-        <li className="tickers__data">
-          24h change, %
-        </li>
-        <li className="tickers__data">
-          Last update time
-        </li>
+        <li className="tickers__data">Trading Pair</li>
+        <li className="tickers__data">Last transaction price</li>
+        <li className="tickers__data">24h change, %</li>
+        <li className="tickers__data">Last update time</li>
       </ul>
-      {tickersData
-        ? Array.from(tickersData).map(item => {
-            return (
-              <ul className="tickers__line" key={item.pair}>
-                <li className="tickers__data tickers__data_left">
-                  {item.pair}
-                </li>
-                <li className="tickers__data">
-                  {item.last}
-                </li>
-                <li
-                  className={`tickers__data ${
-                    Number(item.percent_change_24) < 0
-                      ? `tickers__data_red`
-                      : `tickers__data_green`
-                  }`}
+      {isRetrievingData ? (
+        <Loader />
+      ) : (
+        Array.from(tickersData).map(item => {
+          return (
+            <ul className="tickers__line" key={item.pair}>
+              <li className="tickers__data tickers__data_left">
+                <Link
+                  className="tickers__link"
+                  to={"/exchange"}
+                  onClick={() => props.onPairClick(item.pair)}
                 >
-                  {item.percent_change_24}
-                </li>
-                <li className="tickers__data tickers__data_right">
-                  {moment(Date(item.timestamp)).format("DD-MMM-YY, HH:mm:ss")}
-                </li>
-              </ul>
-            );
-          })
-        : "No data available"}
+                  {item.pair}
+                </Link>
+              </li>
+              <li className="tickers__data">{item.last}</li>
+              <li
+                className={`tickers__data ${
+                  Number(item.percent_change_24) < 0
+                    ? `tickers__data_red`
+                    : `tickers__data_green`
+                }`}
+              >
+                {item.percent_change_24}
+              </li>
+              <li className="tickers__data tickers__data_right">
+                {moment(Date(item.timestamp)).format("DD-MMM-YY, HH:mm:ss")}
+              </li>
+            </ul>
+          );
+        })
+      )}
     </div>
   );
 }

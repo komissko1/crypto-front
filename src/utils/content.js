@@ -109,7 +109,8 @@ export const alertText = {
   serverError: "Server error",
   authorizationError: "Authorisation error",
   profileUpdated: "User's data updated",
-  userExists: "User name already exists"
+  userExists: "User name already exists",
+  transactionError: "Transaction not processed"
 }
 
 // Active tickers for the Landing page

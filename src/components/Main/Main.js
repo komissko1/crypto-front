@@ -4,10 +4,10 @@ import Community from "../Community/Community";
 // import AboutProject from "./AboutProject/AboutProject"
 // import Techs from "./Techs/Techs"
 
-function Main() {
+function Main(props) {
   return (
     <div className="main">
-      <Landing></Landing>
+      <Landing onPairClick={props.onPairClick}></Landing>
       <Community></Community>
       {/* <AboutProject></AboutProject>
       <Techs></Techs> */}

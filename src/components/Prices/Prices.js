@@ -1,32 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import bitstampApi from "../../utils/BitstampApi";
+import Loader from "../Loader/Loader";
 
-function Prices() {
+function Prices(props) {
   const [priceData, setPriceData] = React.useState({});
   const [updateDate, setUpdateDate] = React.useState("");
+  const [isRetrievingData, setIsRetrievingData] = React.useState(false);
 
   React.useEffect(() => {
     function getPriceData() {
+      const loaderTimer = setTimeout(() => setIsRetrievingData(true), 1000);
       return bitstampApi
         .getTickerData()
         .then(data => {
           data = data.slice(0, 40);
           setPriceData(data);
           setUpdateDate(Date());
+          clearTimeout(loaderTimer);
+          setIsRetrievingData(false);
         })
         .catch(() => console.log("error"));
-      }
+    }
+    getPriceData();
+    const timer = setInterval(() => getPriceData(), 30000);
+    return () => clearInterval(timer);
+  }, []);
 
-      getPriceData();
-      const timer = setInterval(() => getPriceData(), 30000);
-      return () => clearInterval(timer);
-    }, []);
-
-    return (
+  return (
     <section className="prices">
       <p>
-      Last updated: {JSON.stringify(priceData) === '{}' ? "awaiting update ..." : updateDate }
+        Last updated:{" "}
+        {JSON.stringify(priceData) === "{}"
+          ? "awaiting update ..."
+          : updateDate}
       </p>
       <div className="prices__container">
         <ul className="prices__line prices__line_white-bold-centered">
@@ -37,11 +44,19 @@ function Prices() {
           <li className="prices__data">24h change, %</li>
           <li className="prices__data">Volume, USD</li>
         </ul>
-        {priceData
+        {!isRetrievingData
           ? Array.from(priceData).map(item => {
               return (
                 <ul className="prices__line" key={item.pair}>
-                  <li className="prices__data prices__data_left"><Link className="prices__link" to={'/exchange'}>{item.pair}</Link></li>
+                  <li className="prices__data prices__data_left">
+                    <Link
+                      className="prices__link"
+                      to={"/exchange"}
+                      onClick={() => props.onPairClick(item.pair)}
+                    >
+                      {item.pair}
+                    </Link>
+                  </li>
                   <li className="prices__data">{item.bid}</li>
                   <li className="prices__data">{item.ask}</li>
                   <li className="prices__data">{item.last}</li>
@@ -62,7 +77,7 @@ function Prices() {
                 </ul>
               );
             })
-          : "No data available"}
+          : <Loader/>}
       </div>
     </section>
   );

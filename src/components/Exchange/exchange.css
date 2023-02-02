@@ -10,3 +10,31 @@
   box-sizing: border-box;
 }
 
+.exchange__login-section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exchange__text {
+margin: 0;
+padding: 1rem;
+text-align: center;
+font-size: 1rem;
+color: white;
+}
+
+.exchange__login-link {
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  color: black;
+  border-style: none;
+  text-decoration: none;
+  background:var(--brand-yellow);
+  font-size: 1rem;
+  font-weight: var(--semibold-font-weight);
+  border-radius: 3px;
+  align-self: center;
+  transition: opacity .3s ease-in-out;
+}

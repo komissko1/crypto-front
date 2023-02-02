@@ -1,0 +1,130 @@
+.currencyList {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.currencyList__container {
+  background-color: var(--back-color);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--basic-grey);
+  box-shadow: rgb(0 0 0 / 24%) 12px 16px 24px, rgb(0 0 0 / 24%) 12px 8px 12px,
+    rgb(0 0 0 / 32%) 4px 4px 8px;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 420px;
+  max-height: 65vh;
+  min-height: 65vh;
+  padding: 3rem 1rem 1rem;
+  margin: 0;
+  font-weight: var(--semibold-font-weight);
+  font-size: var(--paragraph-font-size);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.currencyList_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.currencyList__close-button {
+  margin: 0;
+  padding: 0;
+  width: 2rem;
+  object-fit: cover;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.currencyList__input {
+  margin: 1rem 0;
+  background: url(../../images/search.svg) 1rem center no-repeat;
+  background-color: var(--input-background);
+  border: 1px solid var(--basic-grey);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  padding-left: 3rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: white;
+  text-align: left;
+}
+
+.currencyList__input:focus-visible {
+  outline: none;
+}
+
+.currencyList__input:-webkit-autofill {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 40rem var(--input-background) inset;
+  caret-color: white;
+}
+
+.currencyList__lines {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden auto;
+}
+
+.currencyList__line {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.currencyList__line:hover {
+  background-color: var(--basic-grey);
+}
+
+.currencyList__link {
+  margin: 0;
+  padding: 0.5rem 0;
+  width: 100%;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 4rem auto;
+  grid-template-rows: repeat(2, auto);
+}
+
+.currencyList__logo {
+  width: 2rem;
+  grid-row: span 2;
+  border-radius: 1rem;
+  align-self: center;
+  justify-self: center;
+  font-size: 0;
+}
+
+.currencyList__name {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  color: white;
+}
+
+.currencyList__name_small-grey {
+  font-size: 0.5rem;
+  color: var(--alt-grey);
+}

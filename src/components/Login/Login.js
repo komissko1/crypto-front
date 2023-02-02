@@ -88,7 +88,7 @@ function Login(props) {
             props.onLoginError ? "form__submit-alert_active" : ""
           }`}
         >
-          {alertText.authorizationError}
+          {alertText.serverError}
         </p>
       </Form>
       <p className="form__bottom-text">

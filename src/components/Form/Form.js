@@ -3,7 +3,7 @@ import React from "react";
 function Form(props) {
 
   return (
-    <form className="form__container" onSubmit={props.onSubmit} noValidate>
+    <form className="form__container" onSubmit={props.onSubmit}>
       {props.children}
       <button
         type="submit"

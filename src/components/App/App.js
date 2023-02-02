@@ -16,7 +16,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 
 // Api import
 import * as auth from "../../utils/auth";
-import api from "../../utils/MainApi"
+import api from "../../utils/MainApi";
 
 // User context and protected route import
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
@@ -25,10 +25,16 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
   const [popupMenuState, setPopupMenuState] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [currentWallet, setCurrentWallet] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [currencyPair, setCurrencyPair] = React.useState({
+    cur1: "ETH",
+    cur2: "USDT"
+  });
   const [isLoginError, setIsLoginError] = React.useState(false);
   const [isSignupError, setIsSignupError] = React.useState(false);
   const [isProfileUpdateError, setIsProfileUpdateError] = React.useState(false);
+  const [isTransactionSubmitError, setIsTransactionSubmitError] = React.useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,7 +57,8 @@ function App() {
     if (localStorage.getItem("jwt")) {
       auth.getToken().then(res => {
         if (res) {
-          setCurrentUser(res);
+          setCurrentUser(res.user);
+          setCurrentWallet(res.wallet);
           setIsLoggedIn(true);
           path === ("/login" || "/signup") ? navigate("/") : navigate(path);
         }
@@ -64,8 +71,7 @@ function App() {
     auth
       .register({ name, email, password })
       .then(res => {
-        if (res.email) {
-          // navigate("/login");
+        if (res.user.email) {
           handleLogin({ email, password });
         }
       })
@@ -78,6 +84,7 @@ function App() {
       .then(res => {
         localStorage.setItem("jwt", res.user._id);
         setCurrentUser(res.user);
+        setCurrentWallet(res.wallet);
         setIsLoggedIn(true);
         navigate("/wallet");
       })
@@ -92,6 +99,7 @@ function App() {
           navigate("/");
           localStorage.clear();
           setCurrentUser({});
+          setCurrentWallet({});
           setIsLoggedIn(false);
         }
       })
@@ -102,12 +110,27 @@ function App() {
   function handleUpdateUser({ name, email }) {
     api
       .patchUserData({ name, email })
-      .then((userData) => {
+      .then(userData => {
         setCurrentUser(userData);
       })
       .catch(() => setIsProfileUpdateError(true));
   }
 
+  // Setting currency pair for Exchange page
+  function setCurrency(pair) {
+    setCurrencyPair({
+      cur1: pair.split("/")[0].toUpperCase(),
+      cur2: pair.split("/")[1].toUpperCase()
+    });
+  }
+
+    // Transaction submit. Feedback is an updated wallet.
+    function handleTransactionSubmit(data) {
+      api
+        .postTransaction(data)
+        .then(wallet => setCurrentWallet(wallet))
+        .catch(() => setIsTransactionSubmitError(true));
+    }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -122,7 +145,7 @@ function App() {
             path="/"
             element={
               <>
-                <Main />
+                <Main onPairClick={setCurrency} />
               </>
             }
           />
@@ -130,7 +153,7 @@ function App() {
             path="/prices"
             element={
               <>
-                <Prices />
+                <Prices onPairClick={setCurrency} />
               </>
             }
           />
@@ -138,7 +161,13 @@ function App() {
             path="/exchange"
             element={
               <>
-                <Exchange />
+                <Exchange
+                  loggedIn={isLoggedIn}
+                  activePair={currencyPair}
+                  wallet={currentWallet}
+                  onTransactionSubmit={handleTransactionSubmit}
+                  onTransactionSubmitError={isTransactionSubmitError}
+                />
               </>
             }
           />
@@ -146,24 +175,24 @@ function App() {
             path="/wallet"
             element={
               <ProtectedRoute loggedIn={isLoggedIn}>
-                <Wallet />
+                <Wallet wallet={currentWallet}/>
               </ProtectedRoute>
             }
           />
           <Route
             path="/login"
             element={
-              <>
+              <ProtectedRoute loggedIn={!isLoggedIn}>
                 <Login onLogin={handleLogin} onLoginError={isLoginError} />
-              </>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/signup"
             element={
-              <>
+              <ProtectedRoute loggedIn={!isLoggedIn}>
                 <Signup onSignup={handleSignup} onSignupError={isSignupError} />
-              </>
+              </ProtectedRoute>
             }
           />
           <Route

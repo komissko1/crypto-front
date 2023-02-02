@@ -12,6 +12,7 @@
 .prices__container {
   width: 100%;
   display: flex;
+  flex: auto;
   flex-direction: column;
   padding: 2rem;
   box-sizing: border-box;

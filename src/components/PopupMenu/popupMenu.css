@@ -1,14 +1,14 @@
 .popupMenu {
   margin: 0;
-  padding: 3rem;
+  /* padding: 3rem; */
   visibility: hidden;
   display: flex;
-  position: fixed;
+  position: absolute;
   top: 0;
+  left: 0;
+  bottom: 0;
   right: 0;
   transition: visibility 0.5s, opacity 0.5s ease-in-out;
-  border: 1px solid var(--alt-grey);
-  background: var(--form-background);
   opacity: 0;
   z-index: 10;
 }
@@ -17,8 +17,14 @@
   padding: 2rem 0 0;
   margin: 0;
   width: max-content;
+  max-width: 320px;
+  position: fixed;
+  top: 0;
+  right: 0;
   font-weight: var(--semibold-font-weight);
   font-size: var(--paragraph-font-size);
+  border: 1px solid var(--alt-grey);
+  background: var(--form-background);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,8 +42,8 @@
   width: 2rem;
   object-fit: cover;
   position: absolute;
-  top: 22px;
-  right: 22px;
+  top: 1rem;
+  right: 1rem;
   cursor: pointer;
 }
 

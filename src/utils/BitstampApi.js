@@ -1,12 +1,10 @@
 const apiConfig = {
   baseUrl: 'http://localhost:3002/bitstamp/',
-  ticker: ""
 };
 
 class BitstampApi {
   constructor(apiConfig) {
     this._baseUrl = apiConfig.baseUrl;
-    this._ticker = apiConfig.ticker;
   }
 
   _checkResponse(res) {
@@ -16,8 +14,8 @@ class BitstampApi {
     return Promise.reject("Server is not responding");
   }
 
-  getTickerData() {
-    return fetch(this._baseUrl+this._ticker, {
+  getTickerData(currency) {
+    return fetch(this._baseUrl+`${!currency ? "" : currency}`, {
       headers: {
       "Content-Type": "application/json"},
     }).then(this._checkResponse);

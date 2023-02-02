@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Tickers from "../Tickers/Tickers";
 import { landingStats } from "../../utils/content";
 
-function Landing() {
+function Landing(props) {
   return (
     <section className="landing">
       <article className="landing__infoblock">
@@ -32,7 +32,7 @@ function Landing() {
         </h2>
         <Link to="/signup" className = "landing__register-link link-effect">Register now</Link>
         </div>
-        <Tickers />
+        <Tickers onPairClick={props.onPairClick}/>
       </article>
     </section>
   );

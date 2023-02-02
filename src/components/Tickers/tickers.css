@@ -60,3 +60,13 @@
   color: green
 }
 
+.tickers__link {
+  color: var(--brand-yellow);
+  text-decoration: none;
+}
+
+.tickers__link:hover {
+  text-decoration: underline;
+  font-weight: var(--semibold-font-weight);
+}
+
