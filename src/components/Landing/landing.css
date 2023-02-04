@@ -41,10 +41,20 @@
 
 .landing__subtitle {
   margin: 0;
-  padding-top: 32px;
+  width: 50%;
+  padding-top: 2rem;
   font-size: var(--subtitle-font-size);
   font-weight: var(--regular-font-weight);
+  text-align: center;
   z-index: 1;
+}
+
+.landing__text {
+  padding: 0;
+  margin: 0;
+  font-size: var(--paragraph-font-size);
+  font-weight: var(--regular-font-weight);
+  /* z-index: 1; */
 }
 
 .landing__stats {

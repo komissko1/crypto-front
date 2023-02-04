@@ -6,20 +6,18 @@ function Community() {
     <section className="community">
       <h1 className="community__title">Community</h1>
       <h2 className="community__subtitle">
-        The Bear & Tear project is an ecosystem of&ensp;
+        Here could be real links to the project's&ensp;
         <span className="community__subtitle community__subtitle_bold">
-          crypto-gurus
+          social media
         </span>
         &ensp;and&ensp;
         <span className="community__subtitle community__subtitle_bold">
-          traders
+          news channels
         </span>
       </h2>
-      <p className="community__text">Join the conversation.</p>
+      <p className="community__text">... and you could join the conversation.</p>
       <p className="community__text community__text_small">
-        Global and vibrant community drives the success of the crypto-gurus.
-        Join the conversation on Discord, Twitter, and Reddit to stay up to date
-        on the latest community news.
+        This is a text about how big is the project's community and how you could benefit of becoming it's member. Don't trust such texts.
       </p>
       <div className="community__items">
         {community.map(item => (

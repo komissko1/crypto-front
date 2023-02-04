@@ -17,6 +17,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 // Api import
 import * as auth from "../../utils/auth";
 import api from "../../utils/MainApi";
+import bitstampApi from "../../utils/BitstampApi";
 
 // User context and protected route import
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
@@ -27,14 +28,14 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [currentWallet, setCurrentWallet] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [currencyPair, setCurrencyPair] = React.useState({
-    cur1: "ETH",
-    cur2: "USDT"
-  });
+  const [currencyPair, setCurrencyPair] = React.useState({});
   const [isLoginError, setIsLoginError] = React.useState(false);
   const [isSignupError, setIsSignupError] = React.useState(false);
   const [isProfileUpdateError, setIsProfileUpdateError] = React.useState(false);
-  const [isTransactionSubmitError, setIsTransactionSubmitError] = React.useState(false);
+  const [
+    isTransactionSubmitError,
+    setIsTransactionSubmitError
+  ] = React.useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ function App() {
   const handleTockenCheck = path => {
     if (localStorage.getItem("jwt")) {
       auth.getToken().then(res => {
-        if (res) {
+        if (res.user) {
           setCurrentUser(res.user);
           setCurrentWallet(res.wallet);
           setIsLoggedIn(true);
@@ -116,21 +117,35 @@ function App() {
       .catch(() => setIsProfileUpdateError(true));
   }
 
-  // Setting currency pair for Exchange page
-  function setCurrency(pair) {
-    setCurrencyPair({
-      cur1: pair.split("/")[0].toUpperCase(),
-      cur2: pair.split("/")[1].toUpperCase()
-    });
+  // Setting currency pair and rates for Exchange page
+  function getCurrencyRates(pair) {
+    Promise.all([getRate(pair[0]), getRate(pair[1])])
+      .then(([rate1, rate2]) => {
+        setCurrencyPair({
+          name1: pair[0].toUpperCase(),
+          name2: pair[1].toUpperCase(),
+          rate1,
+          rate2
+        });
+      })
+      .catch(err => console.log(err));
+    }
+
+  // Request for rates through BitStamp Exchange API
+  function getRate(currency) {
+    return bitstampApi
+      .getTickerData(currency.toLowerCase() + "usd")
+      .then(data => data.last)
+      .catch(() => console.log("No tickers received"));
   }
 
-    // Transaction submit. Feedback is an updated wallet.
-    function handleTransactionSubmit(data) {
-      api
-        .postTransaction(data)
-        .then(wallet => setCurrentWallet(wallet))
-        .catch(() => setIsTransactionSubmitError(true));
-    }
+  // Transaction submit. Feedback is an updated wallet.
+  function handleTransactionSubmit(data) {
+    api
+      .postTransaction(data)
+      .then(wallet => setCurrentWallet(wallet))
+      .catch(() => setIsTransactionSubmitError(true));
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -145,7 +160,7 @@ function App() {
             path="/"
             element={
               <>
-                <Main onPairClick={setCurrency} />
+                <Main onPairClick={getCurrencyRates} />
               </>
             }
           />
@@ -153,7 +168,7 @@ function App() {
             path="/prices"
             element={
               <>
-                <Prices onPairClick={setCurrency} />
+                <Prices onPairClick={getCurrencyRates} />
               </>
             }
           />
@@ -165,6 +180,7 @@ function App() {
                   loggedIn={isLoggedIn}
                   activePair={currencyPair}
                   wallet={currentWallet}
+                  getCurrencyRates={getCurrencyRates}
                   onTransactionSubmit={handleTransactionSubmit}
                   onTransactionSubmitError={isTransactionSubmitError}
                 />
@@ -175,7 +191,7 @@ function App() {
             path="/wallet"
             element={
               <ProtectedRoute loggedIn={isLoggedIn}>
-                <Wallet wallet={currentWallet}/>
+                <Wallet wallet={currentWallet} />
               </ProtectedRoute>
             }
           />
@@ -218,7 +234,6 @@ function App() {
           isOpen={popupMenuState}
           onClose={closePopup}
         />
-        {/* <PopupMenu/> */}
       </div>
     </CurrentUserContext.Provider>
   );

@@ -54,13 +54,12 @@ export const getToken = () => {
     headers: {
       'Accept': "application/json",
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem('jwt'),
     },
 
   })
     .then((res) => res.json())
     .then((data) => data)
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err.message));
 };
 
 export const logout = () => {
@@ -70,7 +69,6 @@ export const logout = () => {
     headers: {
       'Accept': "application/json",
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem('jwt'),
     },
   })
     .then((data) => data)

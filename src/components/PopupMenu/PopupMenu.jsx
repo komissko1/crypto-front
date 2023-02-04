@@ -45,7 +45,8 @@ function PopupMenu({ isOpen, onClose, loggedIn }) {
 
         {loggedIn ? (
           <div className="popupMenu__account">
-            <p className="popupMenu__title">Hello, {currentUser.name}</p>
+            <p className="popupMenu__title">Your Account</p>
+            <p className="popupMenu__title">{currentUser.name}</p>
             <Navigation
               mode="vertical-small"
               content={accountNavBar}

@@ -100,8 +100,9 @@
   width: 100%;
   text-decoration: none;
   display: grid;
-  grid-template-columns: 4rem auto;
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 4rem auto auto;
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
 }
 
 .currencyList__logo {
@@ -120,11 +121,27 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  align-self: center;
   font-size: 1rem;
   color: white;
 }
 
 .currencyList__name_small-grey {
   font-size: 0.5rem;
+  color: var(--alt-grey);
+}
+
+.currencyList__amount {
+  width: 100%;
+  padding-right: 2rem;
+  grid-row: span 2;
+  align-self: center;
+  justify-self: right;
+  text-align: right;
+  font-size: 0.75rem;
+  color: green;
+}
+
+.currencyList__amount_grey {
   color: var(--alt-grey);
 }

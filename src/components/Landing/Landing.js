@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import Tickers from "../Tickers/Tickers";
 import { landingStats } from "../../utils/content";
 
@@ -8,11 +9,11 @@ function Landing(props) {
     <section className="landing">
       <article className="landing__infoblock">
         <h1 className="landing__title">
-          Bear & Tear&ensp;
+          This is a DEMO &ensp;
           <span className="landing__title landing__title_light">project</span>
         </h1>
         <h2 className="landing__subtitle">
-          Trade together with crypto-gurus and don't cry.
+          It's NOT a real trading platform. Everything you see here is a mock-up.
         </h2>
         <ul className="landing__stats">
           {landingStats.map(item => (
@@ -27,9 +28,12 @@ function Landing(props) {
       </article>
       <article className="landing__currencies">
         <div className="landing__currency-title">
-        <h2 className="landing__subtitle">
-          Trade over 200 currency pairs online. Transparent rates. Low fees.
-        </h2>
+        <p className="landing__text">
+          You can click any of currency pairs and proceed to the Exchange page for that pair.
+        </p>
+        <p className="landing__text">
+          Please, register to create your demo account and demo wallet.
+        </p>
         <Link to="/signup" className = "landing__register-link link-effect">Register now</Link>
         </div>
         <Tickers onPairClick={props.onPairClick}/>

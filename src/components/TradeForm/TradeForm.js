@@ -1,10 +1,17 @@
 import React from "react";
 import Form from "../Form/Form";
 import { alertText } from "../../utils/content";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function TradeForm(props) {
-  const [currency, setСurrency] = React.useState({});
-  const [rates, setRates] = React.useState({});
+  const currentUser = React.useContext(CurrentUserContext);
+
+  const [currency, setСurrency] = React.useState({
+    name1: "BTC",
+    name2: "USDT",
+    rate1: "",
+    rate2: ""
+  });
   const [validatedFields, setValidatedFields] = React.useState({
     amount1: true,
     amount2: true
@@ -14,30 +21,32 @@ function TradeForm(props) {
   const amount1Ref = React.useRef();
   const amount2Ref = React.useRef();
 
+  // Initial render
+  React.useEffect(() => {
+    if (!props.activePair.name1 || props.activePair.name1 === "") {
+      props.getCurrencyRates([currency.name1, currency.name2]);
+    }
+  }, []);
+
   // Re-render upon update of currency pair or rates
   React.useEffect(() => {
-    setСurrency({ cur1: props.activePair.cur1, cur2: props.activePair.cur2 });
-    setRates({
-      cur1: props.activeRates.cur1,
-      cur2: props.activeRates.cur2,
-      cros: props.activeRates.cur1 / props.activeRates.cur2
-    });
+    setСurrency(props.activePair);
     amount2Ref.current.value = calculateInputValue({
       value: amount1Ref.current.value,
-      rate: rates.cur2 / rates.cur1
-    })
-  }, [props.activePair, props.activeRates]);
+      rate: props.activePair.rate1 / props.activePair.rate2
+    });
+  }, [props.activePair]);
 
   // Automation of filling incative input value and form validation
   const handleFieldChange = e => {
     e.target.id === "amount1"
       ? (amount2Ref.current.value = calculateInputValue({
           value: amount1Ref.current.value,
-          rate: rates.cur1 / rates.cur2
+          rate: currency.rate1 / currency.rate2
         }))
       : (amount1Ref.current.value = calculateInputValue({
           value: amount2Ref.current.value,
-          rate: rates.cur2 / rates.cur1
+          rate: currency.rate2 / currency.rate1
         }));
     const validatedKeyPare = { [e.target.id]: e.target.checkValidity() };
     setValidatedFields({ ...validatedFields, ...validatedKeyPare });
@@ -53,36 +62,36 @@ function TradeForm(props) {
     return calcAmount === 0 ? "" : calcAmount.toFixed(fractionLength);
   }
 
-// Handle currency swap button
+  // Handle currency swap button
   function swapValues() {
     [amount1Ref.current.value, amount2Ref.current.value] = [
       amount2Ref.current.value,
       amount1Ref.current.value
     ];
-    props.onSwap({ cur1: currency.cur2, cur2: currency.cur1 });
+    props.getCurrencyRates([currency.name2, currency.name1]);
   }
 
-// Handle transaction submit
+  // Handle transaction submit
   const handleSubmit = e => {
     e.preventDefault();
     if (isFormValid) {
       props.onTransactionSubmit({
-        cur1: currency.cur1,
+        name1: currency.name1,
         amount1: Number(amount1Ref.current.value),
-        cur2: currency.cur2,
+        name2: currency.name2,
         amount2: Number(amount2Ref.current.value),
-        walletId: props.wallet._id,
+        walletId: props.wallet._id
       });
     }
   };
 
   return (
     <div className="tradeForm">
-      <p className="tradeForm__title">Trade</p>
+      <p className="tradeForm__title">Trade SIMULATION</p>
       <Form
         buttonText="Confirm transaction"
         onSubmit={handleSubmit}
-        isFormValid={isFormValid}
+        isFormValid={currentUser.name && isFormValid}
       >
         <div className="form__inputs-box">
           <label className="form__inputs">
@@ -104,17 +113,19 @@ function TradeForm(props) {
               type="button"
               onClick={props.openPopup}
             >
-              {currency.cur1}&nbsp;&#9013;
+              {currency.name1}&nbsp;&#9013;
             </button>
           </label>
           <span
             className={`form__input-alert ${
-              !rates ? "" : "form__input-alert_pink"
+              !currency ? "" : "form__input-alert_pink"
             }`}
             id="currency1-alert"
           >
             {`${
-              !rates ? "Not enough funds" : `USD/${currency.cur1}=${rates.cur1}`
+              !currency
+                ? "Not enough funds"
+                : `USD/${currency.name1}=${currency.rate1}`
             }`}
           </span>
         </div>
@@ -148,25 +159,25 @@ function TradeForm(props) {
               type="button"
               onClick={props.openPopup}
             >
-              {currency.cur2}&nbsp;&#9013;
+              {currency.name2}&nbsp;&#9013;
             </button>
           </div>
           <span
             className={`form__input-alert ${
-              !props.activeRates ? "" : "form__input-alert_pink"
+              !currency ? "" : "form__input-alert_pink"
             }`}
             id="currency2-alert"
           >
-            {!props.activeRates
+            {!currency
               ? "Not enough funds"
-              : `USD/${currency.cur2}=${rates.cur2}`}
+              : `USD/${currency.name2}=${currency.rate2}`}
           </span>
         </div>
 
         <div className="form__currency-box">
-          <p className="form__rate">{`1 ${currency.cur1} = ${String(
-            rates.cros
-          ).slice(0, 8)} ${currency.cur2}`}</p>
+          <p className="form__rate">{`1 ${currency.name1} = ${String(
+            currency.rate1 / currency.rate2
+          ).slice(0, 8)} ${currency.name2}`}</p>
         </div>
 
         <p

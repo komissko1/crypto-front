@@ -50,7 +50,7 @@ function Tickers(props) {
                 <Link
                   className="tickers__link"
                   to={"/exchange"}
-                  onClick={() => props.onPairClick(item.pair)}
+                  onClick={() => props.onPairClick(item.pair.toLowerCase().split("/"))}
                 >
                   {item.pair}
                 </Link>

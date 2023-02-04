@@ -76,6 +76,7 @@ border-top-right-radius: 0px;
   text-align: left;
   border-bottom: 1px solid var(--brand-pink);
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .form__input:focus-visible {

@@ -2,11 +2,14 @@ import React from "react";
 import { currencyList } from "../../utils/currencyList";
 import closeIcon from "../../images/closeIcon-grey.svg";
 
-function CurrencyPopup({ isOpen, onClose }) {
+function CurrencyPopup({ isOpen, onClose, wallet }) {
+
   const searchRef = React.useRef();
   const [searchResult, setSearchResult] = React.useState([]);
 
   React.useEffect(() => {
+    searchRef.current.value = "";
+    setSearchResult(currencyList);
     handleSearch();
   }, []);
 
@@ -17,8 +20,6 @@ function CurrencyPopup({ isOpen, onClose }) {
         onClose();
       }
     };
-    searchRef.current.value = "";
-    setSearchResult(currencyList);
     document.addEventListener("keydown", closeByEscape);
     return () => document.removeEventListener("keydown", closeByEscape);
   }, [isOpen]);
@@ -30,17 +31,16 @@ function CurrencyPopup({ isOpen, onClose }) {
   };
 
   function handleSearch() {
-    setSearchResult(
-      currencyList.filter(
-        item =>
-          item.name
-            .toLowerCase()
-            .includes(searchRef.current.value.toLowerCase()) ||
-          item.symbol
-            .toLowerCase()
-            .includes(searchRef.current.value.toLowerCase())
-      )
+    const result = currencyList.filter(
+      item =>
+        item.name
+          .toLowerCase()
+          .includes(searchRef.current.value.toLowerCase()) ||
+        item.symbol
+          .toLowerCase()
+          .includes(searchRef.current.value.toLowerCase())
     );
+    setSearchResult(result);
   }
 
   return (
@@ -79,6 +79,21 @@ function CurrencyPopup({ isOpen, onClose }) {
                   <p className="currencyList__name">{item.name}</p>
                   <p className="currencyList__name currencyList__name_small-grey">
                     {item.symbol}
+                  </p>
+                  <p
+                    className={`currencyList__amount ${wallet.currencies &&
+                      `${
+                        wallet.currencies[`${item.symbol}`]
+                          ? ""
+                          : "currencyList__amount_grey"
+                      }`}`}
+                  >
+                    {wallet.currencies &&
+                      `${
+                        wallet.currencies[`${item.symbol}`]
+                          ? Number(wallet.currencies[`${item.symbol}`])
+                          : "no funds"
+                      }`}
                   </p>
                 </div>
               </li>

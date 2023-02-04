@@ -102,7 +102,7 @@ function Profile(props) {
             }`}
           >
             {props.onUpdateError
-              ? alertText.serverError
+              ? alertText.updateEror
               : alertText.profileUpdated}
           </p>
       </Form>

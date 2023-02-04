@@ -21,7 +21,6 @@ class Api {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("jwt")
       },
       credentials: "include",
       body: JSON.stringify({
@@ -36,7 +35,6 @@ class Api {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("jwt"),
       },
       credentials: "include",
       body: JSON.stringify({

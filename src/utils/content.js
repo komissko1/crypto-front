@@ -107,6 +107,7 @@ export const alertText = {
   email: "Not an e-mail",
   password: "Only figures, letters and special symbols allowed",
   serverError: "Server error",
+  updateEror: "Update error",
   authorizationError: "Authorisation error",
   profileUpdated: "User's data updated",
   userExists: "User name already exists",
@@ -115,11 +116,11 @@ export const alertText = {
 
 // Active tickers for the Landing page
 export const activeTickers = [
-  "usdteur",
   "btcusdt",
   "ethusdt",
   "xrpusdt",
-  "shibusd",
-  "dogeusd",
+  "adabtc",
+  "linkbtc",
+  "aavebtc",
 ];
 
