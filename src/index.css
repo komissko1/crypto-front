@@ -34,6 +34,10 @@
 @import url(./components/Exchange/exchange.css);
 @import url(./components/TradeForm/tradeForm.css);
 @import url(./components/Wallet/wallet.css);
+@import url(./components/UserData/userData.css);
+@import url(./components/UserDeals/userDeals.css);
+@import url(./components/UserStats/userStats.css);
+@import url(./components/UserWallet/userWallet.css);
 
 @import url(./components/PageNotFound/pageNotFound.css);
 

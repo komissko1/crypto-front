@@ -1,0 +1,34 @@
+.user {
+  padding: 1rem;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 4rem auto;
+  gap: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--basic-grey);
+  align-items: center;
+}
+
+.user__image {
+  width: 100%;
+  background-color: var(--brand-yellow);
+  border-radius: 1rem;
+  grid-row: span 2;
+  align-self: center;
+}
+
+.user__name {
+  padding: 0;
+  margin: 0;
+  color: var(--brand-yellow);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user__profile {
+  color: var(--alt-grey);
+  width: fit-content;
+  text-decoration: underline;
+  transition: opacity .3s ease-in-out;
+}

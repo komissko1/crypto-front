@@ -118,12 +118,12 @@ function App() {
   }
 
   // Setting currency pair and rates for Exchange page
-  function getCurrencyRates(pair) {
-    Promise.all([getRate(pair[0]), getRate(pair[1])])
+  function getCurrencyRates([cur1, cur2]) {
+    Promise.all([getRate(cur1), getRate(cur2)])
       .then(([rate1, rate2]) => {
         setCurrencyPair({
-          name1: pair[0].toUpperCase(),
-          name2: pair[1].toUpperCase(),
+          name1: cur1.toUpperCase(),
+          name2: cur2.toUpperCase(),
           rate1,
           rate2
         });
@@ -191,7 +191,7 @@ function App() {
             path="/wallet"
             element={
               <ProtectedRoute loggedIn={isLoggedIn}>
-                <Wallet wallet={currentWallet} />
+                <Wallet wallet={currentWallet} getRate={getRate}/>
               </ProtectedRoute>
             }
           />

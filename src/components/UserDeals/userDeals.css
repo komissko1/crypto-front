@@ -1,0 +1,26 @@
+.deals {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  border-radius: 1rem;
+  border: 1px solid var(--basic-grey);
+  overflow: hidden auto;
+}
+
+.deals__table {
+  /* display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto); */
+  list-style-type: none;
+  border-collapse: collapse;
+}
+
+.deals__transaction {
+width: 100%;
+box-sizing: border-box;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--basic-grey);
+}

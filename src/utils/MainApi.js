@@ -30,7 +30,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  postTransaction({ cur1, cur2, amount1, amount2, walletId }) {
+  postTransaction({ name1, name2, amount1, amount2, walletId }) {
     return fetch(this._transactionUrl, {
       method: "POST",
       headers: {
@@ -38,15 +38,27 @@ class Api {
       },
       credentials: "include",
       body: JSON.stringify({
-        creditedCurrency: cur1,
+        creditedCurrency: name1,
         creditedAmount: amount1,
-        debitedCurrency: cur2,
+        debitedCurrency: name2,
         debitedAmount: amount2,
         walletId,
       })
     }).then(this._checkResponse);
   }
+
+  getTransactions () {
+    return fetch(this._transactionUrl, {
+      method: "GET",
+      credentials: 'include',
+      headers: {
+        'Accept': "application/json",
+        "Content-Type": "application/json",
+      },
+    }).then(this._checkResponse);
+  };
 }
+
 
 const mainApi = new Api(apiConfig);
 export default mainApi;

@@ -1,0 +1,44 @@
+.wallet {
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  border-radius: 1rem;
+  border: 1px solid var(--basic-grey);
+  overflow: hidden auto;
+  position: relative;
+}
+
+.wallet__currency {
+  padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 3rem auto;
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+}
+
+.wallet__currency-logo {
+  width: 2rem;
+  grid-row: span 2;
+  border-radius: 1rem;
+  align-self: center;
+  justify-self: left;
+  font-size: 0;
+}
+
+.wallet__currency-amount {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow:hidden;
+  align-self: center;
+  font-size: 1rem;
+  color: var(--alt-grey);
+}
+
+.wallet__currency-amount_small {
+  font-size: 0.75rem;
+  color: green;
+}
