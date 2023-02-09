@@ -28,7 +28,10 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [currentWallet, setCurrentWallet] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [currencyPair, setCurrencyPair] = React.useState({});
+  const [currencyPair, setCurrencyPair] = React.useState({
+    name1: "USDT",
+    name2: "BTC"
+  });
   const [isLoginError, setIsLoginError] = React.useState(false);
   const [isSignupError, setIsSignupError] = React.useState(false);
   const [isProfileUpdateError, setIsProfileUpdateError] = React.useState(false);
@@ -117,19 +120,10 @@ function App() {
       .catch(() => setIsProfileUpdateError(true));
   }
 
-  // Setting currency pair and rates for Exchange page
-  function getCurrencyRates([cur1, cur2]) {
-    Promise.all([getRate(cur1), getRate(cur2)])
-      .then(([rate1, rate2]) => {
-        setCurrencyPair({
-          name1: cur1.toUpperCase(),
-          name2: cur2.toUpperCase(),
-          rate1,
-          rate2
-        });
-      })
-      .catch(err => console.log(err));
-    }
+  // Setting currency pair for Exchange page
+  function setExchangePair([name1, name2]) {
+    setCurrencyPair({name1, name2});
+  }
 
   // Request for rates through BitStamp Exchange API
   function getRate(currency) {
@@ -140,11 +134,13 @@ function App() {
   }
 
   // Transaction submit. Feedback is an updated wallet.
-  function handleTransactionSubmit(data) {
-    api
-      .postTransaction(data)
-      .then(wallet => setCurrentWallet(wallet))
-      .catch(() => setIsTransactionSubmitError(true));
+  async function handleTransactionSubmit(data) {
+    try {
+      const wallet = await api.postTransaction(data);
+      return setCurrentWallet(wallet);
+    } catch {
+      return setIsTransactionSubmitError(true);
+    }
   }
 
   return (
@@ -160,7 +156,7 @@ function App() {
             path="/"
             element={
               <>
-                <Main onPairClick={getCurrencyRates} />
+                <Main onPairClick={setExchangePair} />
               </>
             }
           />
@@ -168,7 +164,7 @@ function App() {
             path="/prices"
             element={
               <>
-                <Prices onPairClick={getCurrencyRates} />
+                <Prices onPairClick={setExchangePair} />
               </>
             }
           />
@@ -179,8 +175,9 @@ function App() {
                 <Exchange
                   loggedIn={isLoggedIn}
                   activePair={currencyPair}
+                  onPairChange={setExchangePair}
+                  getRate={getRate}
                   wallet={currentWallet}
-                  getCurrencyRates={getCurrencyRates}
                   onTransactionSubmit={handleTransactionSubmit}
                   onTransactionSubmitError={isTransactionSubmitError}
                 />
@@ -191,7 +188,7 @@ function App() {
             path="/wallet"
             element={
               <ProtectedRoute loggedIn={isLoggedIn}>
-                <Wallet wallet={currentWallet} getRate={getRate}/>
+                <Wallet wallet={currentWallet} getRate={getRate} />
               </ProtectedRoute>
             }
           />

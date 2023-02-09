@@ -9,8 +9,10 @@ import api from "../../utils/MainApi";
 function Wallet(props) {
   const [transactionsData, setTransactionsData] = React.useState([]);
   const [isRetrievingWallet, setIsRetrievingWallet] = React.useState(false);
-  const [isRetrievingTransactions, setIsRetrievingTransactions] =
-    React.useState(false);
+  const [
+    isRetrievingTransactions,
+    setIsRetrievingTransactions
+  ] = React.useState(false);
   const [walletData, setWalletData] = React.useState([]);
 
   React.useEffect(() => {
@@ -20,11 +22,11 @@ function Wallet(props) {
         item.amount = props.wallet.currencies[`${item.symbol}`];
         props
           .getRate(item.symbol)
-          .then((rate) => {
+          .then(rate => {
             item.amountInUsd = item.amount * rate;
             arr.push(item);
           })
-          .catch((err) => console.log(err));
+          .catch(err => console.log(err));
       }
       return arr;
     }, []);
@@ -40,7 +42,7 @@ function Wallet(props) {
     );
     api
       .getTransactions()
-      .then((data) => {
+      .then(data => {
         setTransactionsData(data);
         clearTimeout(loaderTimer);
         setIsRetrievingTransactions(false);

@@ -19,8 +19,8 @@ function Exchange(props) {
   const closePopup = selectedCurrency => {
     if (selectedCurrency && popupState.cur) {
       popupState.cur === "cur1"
-        ? props.getCurrencyRates([selectedCurrency, props.activePair.name2])
-        : props.getCurrencyRates([props.activePair.name1, selectedCurrency]);
+        ? props.onPairChange([selectedCurrency, props.activePair.name2])
+        : props.onPairChange([props.activePair.name1, selectedCurrency]);
     }
     setPopupState({ isOpen: false, cur: "" });
   };
@@ -28,8 +28,9 @@ function Exchange(props) {
   return (
     <div className="exchange">
       <TradeForm
-        getCurrencyRates={props.getCurrencyRates}
         activePair={props.activePair}
+        onPairChange={props.onPairChange}
+        getRate={props.getRate}
         wallet={props.wallet}
         openPopup={openPopup}
         onTransactionSubmit={props.onTransactionSubmit}
