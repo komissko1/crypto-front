@@ -12,12 +12,13 @@ function UserStats(props) {
         </p>
         <p className="stats__text">Invested amount, USD: 10,000.00</p>
         <p className="stats__text">
-          Total number of transactions: {props.transactionsData}
+          Total number of transactions: {props.transactions}
         </p>
-        <p className="stats__text">
-          Current funds, USD:
-          {/* {statsData.total} */}
-        </p>
+        {props.walletData.map(item => {
+          return (
+        <p className="stats__text" key={item.symbol}>
+          Current funds, USD: {item.amountInUsd}
+        </p>)})}
       </div>
       <div className="stats__profit">
         <p className="stats__text stats__text_large">Profit: {}</p>

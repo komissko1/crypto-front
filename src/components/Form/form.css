@@ -12,13 +12,12 @@
   z-index: 1;
 }
 
-
 .form__title {
   margin: 0;
   padding: 0.5rem 0;
   box-sizing: border-box;
   color: white;
-  font-weight: var(--semibold-font-weight)
+  font-weight: var(--semibold-font-weight);
 }
 
 .form__container {
@@ -29,7 +28,7 @@
 /* Styles used for inputs in all forms: Login, Register, Exchange, Profile */
 .form__inputs-box {
   margin-top: 3px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   height: max-content;
   padding: 0.5rem;
   display: flex;
@@ -43,13 +42,13 @@
 }
 
 .form__inputs-box_noradius-bottom {
-border-bottom-left-radius: 0px;
-border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .form__inputs-box_noradius-top {
-border-top-left-radius: 0px;
-border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .form__inputs-box:focus-within {
@@ -57,10 +56,10 @@ border-top-right-radius: 0px;
 }
 
 .form__inputs {
-  box-sizing: border-box;
-  width: 100%;
+  /* box-sizing: border-box; */
+  /* width: 100%; */
   display: flex;
-  flex-flow: nowrap;
+  /* flex-flow: nowrap; */
   justify-content: space-between;
   gap: 1rem;
 }
@@ -89,12 +88,20 @@ border-top-right-radius: 0px;
   caret-color: white;
 }
 
+.form__alerts {
+  display: flex;
+  justify-content: space-between;
+}
+
 .form__input-alert {
   box-sizing: border-box;
   min-height: 0.5rem;
   padding: 0.5rem 0;
   font-size: 0.75rem;
   visibility: hidden;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .form__input-alert_pink {
@@ -121,14 +128,14 @@ border-top-right-radius: 0px;
   border-color: var(--form-background);
   color: var(--back-color);
   background-color: var(--button-inactive);
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .form__submit_active {
   color: white;
   background-color: var(--button-active);
   cursor: pointer;
-  pointer-events:inherit;
+  pointer-events: inherit;
 }
 
 .form__submit-alert {
@@ -144,37 +151,36 @@ border-top-right-radius: 0px;
   visibility: visible;
 }
 
-.form__bottom-text{
+.form__bottom-text {
   margin: 0;
   padding: 1rem 0 0;
   text-align: center;
 }
 
-.form__bottom-link{
+.form__bottom-link {
   margin: 0;
   text-decoration: none;
   opacity: 1;
-  transition: opacity .5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
   color: var(--brand-yellow);
 }
 
-
 /* Styles used only for Exchange form */
 .form__droplist-button {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   padding: 0 1rem;
-  width: 8rem;
-  box-shadow: none;
+  width: 10rem;
+  /* box-shadow: none; */
   cursor: pointer;
   border-radius: 0.5rem;
-  outline: none;
+  /* outline: none; */
   border: none;
   color: rgb(255, 255, 255);
   background-color: var(--basic-grey);
 }
 
 .form__swap-box {
-  width: 100%;
+  /* width: 100%; */
   padding: 0.5rem 0;
   display: flex;
   justify-content: center;
@@ -196,7 +202,7 @@ border-top-right-radius: 0px;
   padding: 0.5rem 0 0 1rem;
   box-sizing: border-box;
   color: white;
-  font-weight: var(--semibold-font-weight)
+  font-weight: var(--semibold-font-weight);
 }
 
 /* Disable arrows for inuts with type "number" */
@@ -207,6 +213,7 @@ border-top-right-radius: 0px;
 	appearance: textfield;
 } */
 
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-	display: none;
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
 }

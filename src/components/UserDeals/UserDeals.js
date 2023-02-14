@@ -31,19 +31,19 @@ function UserDeals(props) {
         <tbody>
           {props.isRetrievingTransactions ? (
             <Loader />
-          ) : ("dsdsgfdgsdf"
-            // Array.from(props.transactionsData).map((item) => {
-            //   return (
-            //     <tr className="deals__transaction" key={item._id}>
-            //       <td className="wallet__text">{item.dateStamp}</td>
-            //       <td className="wallet__text">{item.creditedCurrency}</td>
-            //       <td className="wallet__text">{item.creditedAmount}</td>
-            //       <td className="wallet__text">{item.debitedCurrency}</td>
-            //       <td className="wallet__text">{item.debitedAmount}</td>
-            //       <td className="wallet__text">{item._id}</td>
-            //     </tr>
-            //   );
-            // })
+          ) : (
+            props.transactionsData.map((item) => {
+              return (
+                <tr className="deals__transaction" key={item._id}>
+                  <td className="wallet__text">{item.dateStamp}</td>
+                  <td className="wallet__text">{item.creditedCurrency}</td>
+                  <td className="wallet__text">{item.creditedAmount}</td>
+                  <td className="wallet__text">{item.debitedCurrency}</td>
+                  <td className="wallet__text">{item.debitedAmount}</td>
+                  <td className="wallet__text">{item._id}</td>
+                </tr>
+              );
+            })
           )}
         </tbody>
       </table>

@@ -79,8 +79,8 @@ export const accountNavBar = [
     name: "Profile"
   },
   {
-    link: "/wallet",
-    name: "Wallet&Stats"
+    link: "/dashboard",
+    name: "Dashboard"
   }
 ];
 

@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Prices from "../Prices/Prices";
 import Exchange from "../Exchange/Exchange";
-import Wallet from "../Wallet/Wallet";
+import Dashboard from "../Dashboard/Dashboard";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import Profile from "../Profile/Profile";
@@ -39,6 +39,7 @@ function App() {
     isTransactionSubmitError,
     setIsTransactionSubmitError
   ] = React.useState(false);
+  const [isRateError, setIsRateError] = React.useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ function App() {
         setCurrentUser(res.user);
         setCurrentWallet(res.wallet);
         setIsLoggedIn(true);
-        navigate("/wallet");
+        navigate("/dashboard");
       })
       .catch(() => setIsLoginError(true));
   };
@@ -126,11 +127,14 @@ function App() {
   }
 
   // Request for rates through BitStamp Exchange API
-  function getRate(currency) {
-    return bitstampApi
-      .getTickerData(currency.toLowerCase() + "usd")
-      .then(data => data.last)
-      .catch(() => console.log("No tickers received"));
+  async function getRate(currency) {
+    try {
+      const data = await bitstampApi
+        .getTickerData(currency.toLowerCase() + "usd");
+      return data.last;
+    } catch {
+      return console.log("No tickers received");
+    }
   }
 
   // Transaction submit. Feedback is an updated wallet.
@@ -185,10 +189,10 @@ function App() {
             }
           />
           <Route
-            path="/wallet"
+            path="/dashboard"
             element={
               <ProtectedRoute loggedIn={isLoggedIn}>
-                <Wallet wallet={currentWallet} getRate={getRate} />
+                <Dashboard wallet={currentWallet} getRate={getRate} isRateError={isRateError}/>
               </ProtectedRoute>
             }
           />

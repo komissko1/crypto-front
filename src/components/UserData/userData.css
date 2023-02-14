@@ -21,9 +21,8 @@
   padding: 0;
   margin: 0;
   color: var(--brand-yellow);
-  white-space: nowrap;
+  white-space: wrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .user__profile {
