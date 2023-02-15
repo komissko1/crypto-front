@@ -53,3 +53,7 @@
 
 @import url(./components/Loader/loader.css);
 @import url(./utils/link-effect.css);
+
+@media all and (max-width: 768px) {
+  html {font-size: 12px}
+}

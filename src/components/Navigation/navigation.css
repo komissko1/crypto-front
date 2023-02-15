@@ -2,10 +2,10 @@
   padding: 0;
   margin: 0;
   display: flex;
-  width: fit-content;
   list-style-type: none;
   gap: 2rem;
-  font-size: var(--paragraph-font-size);
+  font-size: 1rem;
+  flex-wrap: wrap;
 }
 
 .navBar_small {
@@ -16,6 +16,7 @@
 .navBar_orange {
   gap: 1rem;
   font-size: 1rem;
+  justify-self: right;
   color: var(--brand-yellow);
 }
 
@@ -23,6 +24,7 @@
   gap: 1rem;
   font-size: 1rem;
   flex-direction: column;
+  text-align: center;
 }
 
 .navBar__link{

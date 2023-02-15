@@ -1,5 +1,4 @@
 .header {
-  width: 100%;
   display: flex;
   gap: 2rem;
   box-sizing: border-box;
@@ -20,9 +19,8 @@
 }
 
 .header__links-container {
-  width: 100%;
   display: grid;
-  grid-template-columns: auto min-content min-content;
+  grid-template-columns: 3fr 2fr 1fr;
   align-items: center;
   gap: 1rem;
 }
@@ -47,18 +45,3 @@
   transition: opacity .3s ease-in-out;
 }
 
-@media screen and (max-width: 768px) {
-  .header {
-    padding: 0 2rem;
-  }
-
-  .header__login-link {
-    font-size: 12px;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .header {
-    padding: 0 14px;
-  }
-}

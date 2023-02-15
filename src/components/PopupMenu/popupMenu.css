@@ -1,6 +1,5 @@
 .popupMenu {
   margin: 0;
-  /* padding: 3rem; */
   visibility: hidden;
   display: flex;
   position: absolute;
@@ -14,10 +13,9 @@
 }
 
 .popupMenu__container {
-  padding: 2rem 0 0;
+  padding: 4rem 1rem;
   margin: 0;
-  width: max-content;
-  max-width: 320px;
+  width: 320px;
   position: fixed;
   top: 0;
   right: 0;
@@ -26,7 +24,7 @@
   border: 1px solid var(--alt-grey);
   background: var(--form-background);
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
 }
@@ -49,18 +47,25 @@
 
 .popupMenu__account{
   margin-top: 2rem;
+  padding-left: 1rem;
+  width: 50%;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
-  border-top: 1px solid var(--alt-grey);
+  border-left: 1px solid var(--alt-grey);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .popupMenu__title{
+  width: 100%;
   margin: 0;
   padding: 1rem 0;
   font-size: var(--paragraph-font-size);
   color: var(--brand-yellow);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .popupMenu__item{

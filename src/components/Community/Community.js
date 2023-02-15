@@ -32,7 +32,7 @@ function Community() {
                   />
                   {item.name}
                 </p>
-                <p className="community__item-title">&#11111;</p>
+                <p className="community__item-title">&#8599;</p>
               </div>
               <div className="community__item-line">
                 <p className="community__item-text">{item.text}</p>

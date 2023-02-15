@@ -9,6 +9,7 @@ function Navigation(props) {
           <NavLink
             key={item.name}
             to={item.link}
+            onClick={props.onClose}
             className={({ isActive }) =>
               isActive
                 ? `navBar__link link-effect navBar__link_active`

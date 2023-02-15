@@ -7,7 +7,7 @@ import closeIcon from "../../images/closeIcon.svg";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function PopupMenu({ isOpen, onClose, loggedIn }) {
+function PopupMenu({ isOpen, onClose, loggedIn, onLogout }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -41,22 +41,22 @@ function PopupMenu({ isOpen, onClose, loggedIn }) {
           onClick={onClose}
         />
 
-        <Navigation mode="vertical-small" content={mainNavBar}></Navigation>
+        <Navigation mode="vertical-small" content={mainNavBar} onClose={onClose}></Navigation>
 
         {loggedIn ? (
           <div className="popupMenu__account">
-            <p className="popupMenu__title">Your Account</p>
             <p className="popupMenu__title">{currentUser.name}</p>
             <Navigation
               mode="vertical-small"
               content={accountNavBar}
+              onClick={onClose}
             ></Navigation>
-            <Link to="" className="popupMenu__item link-effect">
+            <Link to="" className="popupMenu__item link-effect" onClick={onLogout}>
               Logout
             </Link>
           </div>
         ) : (
-          <Link to="/login" className="popupMenu__item link-effect">
+          <Link to="/login" className="popupMenu__item link-effect" onClick={onClose}>
             Login
           </Link>
         )}

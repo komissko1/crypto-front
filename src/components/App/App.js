@@ -265,6 +265,7 @@ function App() {
           loggedIn={isLoggedIn}
           isOpen={popupMenuState}
           onClose={closePopup}
+          onLogout={handleLogout}
         />
       </div>
     </CurrentUserContext.Provider>
