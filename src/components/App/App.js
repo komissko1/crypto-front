@@ -11,6 +11,10 @@ import Dashboard from "../Dashboard/Dashboard";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import Profile from "../Profile/Profile";
+import Faq from "../Policies/Faq";
+import Privacy from "../Policies/Privacy";
+import Security from "../Policies/Security";
+
 import PopupMenu from "../PopupMenu/PopupMenu";
 import PageNotFound from "../PageNotFound/PageNotFound";
 
@@ -30,15 +34,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currencyPair, setCurrencyPair] = React.useState({
     name1: "USDT",
-    name2: "BTC"
+    name2: "BTC",
   });
   const [isLoginError, setIsLoginError] = React.useState(false);
   const [isSignupError, setIsSignupError] = React.useState(false);
   const [isProfileUpdateError, setIsProfileUpdateError] = React.useState(false);
-  const [
-    isTransactionSubmitError,
-    setIsTransactionSubmitError
-  ] = React.useState(false);
+  const [isTransactionSubmitError, setIsTransactionSubmitError] =
+    React.useState(false);
   const [isRateError, setIsRateError] = React.useState(false);
 
   const location = useLocation();
@@ -58,9 +60,9 @@ function App() {
     handleTockenCheck(location.pathname);
   }, []);
 
-  const handleTockenCheck = path => {
+  const handleTockenCheck = (path) => {
     if (localStorage.getItem("jwt")) {
-      auth.getToken().then(res => {
+      auth.getToken().then((res) => {
         if (res.user) {
           setCurrentUser(res.user);
           setCurrentWallet(res.wallet);
@@ -75,7 +77,7 @@ function App() {
   const handleSignup = ({ name, email, password }) => {
     auth
       .register({ name, email, password })
-      .then(res => {
+      .then((res) => {
         if (res.user.email) {
           handleLogin({ email, password });
         }
@@ -86,7 +88,7 @@ function App() {
   const handleLogin = ({ email, password }) => {
     auth
       .authorize(email, password)
-      .then(res => {
+      .then((res) => {
         localStorage.setItem("jwt", res.user._id);
         setCurrentUser(res.user);
         setCurrentWallet(res.wallet);
@@ -99,7 +101,7 @@ function App() {
   const handleLogout = () => {
     auth
       .logout()
-      .then(res => {
+      .then((res) => {
         if (res) {
           navigate("/");
           localStorage.clear();
@@ -115,7 +117,7 @@ function App() {
   function handleUpdateUser({ name, email }) {
     api
       .patchUserData({ name, email })
-      .then(userData => {
+      .then((userData) => {
         setCurrentUser(userData);
       })
       .catch(() => setIsProfileUpdateError(true));
@@ -123,14 +125,15 @@ function App() {
 
   // Setting currency pair for Exchange page
   function setExchangePair([name1, name2]) {
-    setCurrencyPair({name1, name2});
+    setCurrencyPair({ name1, name2 });
   }
 
   // Request for rates through BitStamp Exchange API
   async function getRate(currency) {
     try {
-      const data = await bitstampApi
-        .getTickerData(currency.toLowerCase() + "usd");
+      const data = await bitstampApi.getTickerData(
+        currency.toLowerCase() + "usd"
+      );
       return data.last;
     } catch {
       return console.log("No tickers received");
@@ -192,7 +195,11 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute loggedIn={isLoggedIn}>
-                <Dashboard wallet={currentWallet} getRate={getRate} isRateError={isRateError}/>
+                <Dashboard
+                  wallet={currentWallet}
+                  getRate={getRate}
+                  isRateError={isRateError}
+                />
               </ProtectedRoute>
             }
           />
@@ -222,6 +229,30 @@ function App() {
                   onUpdateError={isProfileUpdateError}
                 />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/faq"
+            element={
+              <>
+                <Faq />
+              </>
+            }
+          />
+          <Route
+            path="/privacy"
+            element={
+              <>
+                <Privacy />
+              </>
+            }
+          />
+          <Route
+            path="/security"
+            element={
+              <>
+                <Security />
+              </>
             }
           />
           <Route

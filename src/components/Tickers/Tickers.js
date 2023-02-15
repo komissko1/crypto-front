@@ -14,10 +14,10 @@ function Tickers(props) {
       const loaderTimer = setTimeout(() => setIsRetrievingData(true), 1000);
       return bitstampApi
         .getTickerData()
-        .then(data => {
-          data = activeTickers.map(item => {
+        .then((data) => {
+          data = activeTickers.map((item) => {
             return data.find(
-              ticker => ticker.pair.replace("/", "").toLowerCase() === item
+              (ticker) => ticker.pair.replace("/", "").toLowerCase() === item
             );
           });
           setTickersData(data);
@@ -43,14 +43,16 @@ function Tickers(props) {
       {isRetrievingData ? (
         <Loader />
       ) : (
-        Array.from(tickersData).map(item => {
+        Array.from(tickersData).map((item) => {
           return (
             <ul className="tickers__line" key={item.pair}>
               <li className="tickers__data tickers__data_left">
                 <Link
                   className="tickers__link"
                   to={"/exchange"}
-                  onClick={() => props.onPairClick(item.pair.toLowerCase().split("/"))}
+                  onClick={() =>
+                    props.onPairClick(item.pair.toLowerCase().split("/"))
+                  }
                 >
                   {item.pair}
                 </Link>
@@ -66,7 +68,9 @@ function Tickers(props) {
                 {item.percent_change_24}
               </li>
               <li className="tickers__data tickers__data_right">
-                {moment(Date(item.timestamp)).format("DD-MMM-YY, HH:mm:ss")}
+                {Intl.DateTimeFormat("en-DE", {
+                  hour: '2-digit', minute: '2-digit', second: '2-digit',
+                }).format(item.timestamp+300)}
               </li>
             </ul>
           );

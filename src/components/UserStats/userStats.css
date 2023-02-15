@@ -23,13 +23,19 @@ width: fit-content;
 }
 
 .stats__text_large {
+  color: var(--brand-yellow);
+  font-size: var(--subtitle-font-size);
+  line-height: var(--title-font-size);
+}
+
+.stats__text_pink {
   color: var(--brand-pink);
-  font-size: var(--title-font-size);
 }
 
 .stats__profit {
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
   }

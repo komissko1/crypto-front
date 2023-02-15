@@ -1,14 +1,13 @@
 import React from "react";
 import Loader from "../Loader/Loader";
 
-function UserWallet({walletData, isRetrievingWallet}) {
-
+function UserWallet(props) {
   return (
     <div className="wallet">
-      {isRetrievingWallet ? (
+      {props.isRetrievingData ? (
         <Loader />
       ) : (
-        walletData.map(item => {
+        props.walletData && props.walletData.map(item => {
           return (
             <div className="wallet__currency" key={item.symbol}>
               <img
