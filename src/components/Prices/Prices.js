@@ -52,7 +52,7 @@ function Prices(props) {
                     <Link
                       className="prices__link"
                       to={"/exchange"}
-                      onClick={() => props.onPairClick(item.pair.toLowerCase().split("/"))}
+                      onClick={() => props.onPairClick(item.pair.split("/"))}
                     >
                       {item.pair}
                     </Link>

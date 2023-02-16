@@ -10,11 +10,11 @@ function Header(props) {
 
   React.useEffect(() => {
     var resizeTimer;
-    window.onresize = function() {
+    window.onresize = function () {
       if (resizeTimer) {
         clearTimeout(resizeTimer);
       }
-      resizeTimer = setTimeout(function() {
+      resizeTimer = setTimeout(function () {
         setwindowSize(window.innerWidth);
       }, 200);
     };
@@ -27,26 +27,37 @@ function Header(props) {
       </Link>
       <div className="header__links-container">
         {windowSize <= 768 ? (
-          <img
-            onClick={props.onClick}
-            className="header__navBar-button link-effect"
-            src={navButton}
-            alt="Menu"
-          />
+          <>
+            <span></span>
+            <span></span>
+            <img
+              onClick={props.onClick}
+              className="header__navBar-button link-effect"
+              src={navButton}
+              alt="Menu"
+            />
+          </>
         ) : (
           <>
             <Navigation content={mainNavBar}></Navigation>
             {props.loggedIn ? (
               <>
                 <Navigation mode="orange" content={accountNavBar}></Navigation>
-                <Link to="/" className="header__login-link link-effect" onClick={props.onLogout}>
+                <Link
+                  to="/"
+                  className="header__login-link link-effect"
+                  onClick={props.onLogout}
+                >
                   Logout
                 </Link>
               </>
             ) : (
-              <Link to="/login" className="header__login-link link-effect">
-                Login
-              </Link>
+              <>
+                <span></span>
+                <Link to="/login" className="header__login-link link-effect">
+                  Login
+                </Link>
+              </>
             )}
           </>
         )}

@@ -7,7 +7,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__content">
         <Navigation mode="small" content={footerNavBar}></Navigation>
-        <div className="footer__text">Developed by Gdzenn inc. &#169;{new Date().getFullYear()}</div>
+        <div className="footer__text">Developed by Gdzenn &#169;{new Date().getFullYear()}</div>
       </div>
       <div className="footer__medialinks">
         {community.map((item) => (

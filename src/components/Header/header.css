@@ -1,4 +1,5 @@
 .header {
+  width: 100%;
   display: flex;
   gap: 2rem;
   box-sizing: border-box;
@@ -19,8 +20,9 @@
 }
 
 .header__links-container {
+  width: 100%;
   display: grid;
-  grid-template-columns: 3fr 2fr 1fr;
+  grid-template-columns: auto auto 6rem;
   align-items: center;
   gap: 1rem;
 }
@@ -35,6 +37,7 @@
 }
 
 .header__login-link {
+  width: 4rem;
   padding: 0.5rem 1rem;
   color: black;
   border-style: none;
@@ -43,5 +46,7 @@
   border-radius: 3px;
   height: fit-content;
   transition: opacity .3s ease-in-out;
+  text-align: center;
+  justify-self: right;
 }
 
