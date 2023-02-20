@@ -7,7 +7,7 @@
 }
 
 .stats__data {
-width: fit-content;
+  width: fit-content;
 }
 
 .stats__text {
@@ -38,4 +38,14 @@ width: fit-content;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+@media screen and (max-width: 410px) {
+  .stats {
+    flex-direction: column;
   }
+
+  .stats__profit {
+    margin-top: 2rem;
+  }
+}

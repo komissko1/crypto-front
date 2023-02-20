@@ -15,7 +15,7 @@ function TradeForm(props) {
     amount1: { valid: true, alert: "" },
     amount2: { valid: true, alert: "" },
   });
-  const [isFormValid, setIsFormValid] = React.useState(false);
+  const [isFormValid, setIsFormValid] = React.useState();
 
   const amount1Ref = React.useRef();
   const amount2Ref = React.useRef();
@@ -44,17 +44,7 @@ function TradeForm(props) {
 
   // Automation of filling inactive input value and form validation
   const handleFieldChange = (e) => {
-    // Autofill inactive input
-    e.target.id === "amount1"
-      ? (amount2Ref.current.value = calculateInputValue({
-          value: amount1Ref.current.value,
-          rate: currencyPairRates.rate1 / currencyPairRates.rate2,
-        }))
-      : (amount1Ref.current.value = calculateInputValue({
-          value: amount2Ref.current.value,
-          rate: currencyPairRates.rate2 / currencyPairRates.rate1,
-        }));
-    // Function validates all inputs in the Trading form
+    // Function validating all inputs in the Trading form
     function validateInputs(inputs) {
       const validatedFields = validatedInputs;
       inputs.forEach((item, index) => {
@@ -86,6 +76,17 @@ function TradeForm(props) {
       });
     }
     // Validation function ends here
+
+    // Autofill inactive input
+    e.target.id === "amount1"
+      ? (amount2Ref.current.value = calculateInputValue({
+          value: amount1Ref.current.value,
+          rate: currencyPairRates.rate1 / currencyPairRates.rate2,
+        }))
+      : (amount1Ref.current.value = calculateInputValue({
+          value: amount2Ref.current.value,
+          rate: currencyPairRates.rate2 / currencyPairRates.rate1,
+        }));
     validateInputs([amount1Ref.current, amount2Ref.current]);
     setIsFormValid(
       validatedInputs.amount1.valid && validatedInputs.amount2.valid
@@ -114,7 +115,6 @@ function TradeForm(props) {
   // Handle transaction submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(props.wallet._id);
     if (isFormValid) {
       props.onTransactionSubmit({
         name1: currencyPair.name1,
@@ -140,7 +140,6 @@ function TradeForm(props) {
               className="form__input"
               type="text"
               id="amount1"
-              pattern={regexp}
               maxLength="10"
               placeholder="0"
               required
@@ -193,7 +192,6 @@ function TradeForm(props) {
               className="form__input"
               type="text"
               id="amount2"
-              pattern={regexp}
               maxLength="10"
               placeholder="0"
               required

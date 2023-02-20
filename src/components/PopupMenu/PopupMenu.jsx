@@ -41,13 +41,13 @@ function PopupMenu({ isOpen, onClose, loggedIn, onLogout }) {
           onClick={onClose}
         />
 
-        <Navigation mode="vertical-small" content={mainNavBar} onClose={onClose}></Navigation>
+        <Navigation mode="vertical" content={mainNavBar} onClose={onClose}></Navigation>
 
         {loggedIn ? (
           <div className="popupMenu__account">
             <p className="popupMenu__title">{currentUser.name}</p>
             <Navigation
-              mode="vertical-small"
+              mode="vertical"
               content={accountNavBar}
               onClick={onClose}
             ></Navigation>

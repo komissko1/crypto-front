@@ -13,7 +13,7 @@
 .wallet__currency {
   padding-bottom: 1rem;
   display: grid;
-  grid-template-columns: 3rem auto;
+  grid-template-columns: 3rem min-content;
   grid-template-rows: auto auto;
   grid-auto-flow: column;
 }
@@ -41,4 +41,11 @@
 .wallet__currency-amount_small {
   font-size: 0.75rem;
   color: green;
+}
+
+@media screen and (max-width: 580px) {
+  .wallet {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 12rem));
+  }
 }

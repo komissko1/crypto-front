@@ -9,11 +9,12 @@ function Prices(props) {
   const [isRetrievingData, setIsRetrievingData] = React.useState(false);
 
   React.useEffect(() => {
+    // Function requesting for price data from server
     function getPriceData() {
       const loaderTimer = setTimeout(() => setIsRetrievingData(true), 1000);
       return bitstampApi
         .getTickerData()
-        .then(data => {
+        .then((data) => {
           data = data.slice(0, 40);
           setPriceData(data);
           setUpdateDate(Date());
@@ -22,33 +23,43 @@ function Prices(props) {
         })
         .catch(() => console.log("error"));
     }
+
+    // Render
     getPriceData();
     const timer = setInterval(() => getPriceData(), 30000);
     return () => clearInterval(timer);
-  }, []);
+  }, [props.windowSize]);
 
   return (
     <section className="prices">
       <p>
-        Last updated:{" "}
+        Last updated:&nbsp;
         {JSON.stringify(priceData) === "{}"
           ? "awaiting update ..."
           : updateDate}
       </p>
       <div className="prices__container">
-        <ul className="prices__line prices__line_white-bold-centered">
-          <li className="prices__data">Trading Pair</li>
-          <li className="prices__data">Buy</li>
-          <li className="prices__data">Sell</li>
-          <li className="prices__data">Last price</li>
-          <li className="prices__data">24h change, %</li>
-          <li className="prices__data">Volume, USD</li>
-        </ul>
-        {!isRetrievingData
-          ? Array.from(priceData).map(item => {
+      {isRetrievingData ? (
+        <Loader />
+      ) : (
+        <table className="prices__table">
+          <thead>
+            <tr className="prices__line">
+              <th scope="col" className="prices__data">Trading Pair</th>
+              <th scope="col" className="prices__data">Buy</th>
+              <th scope="col" className="prices__data">Sell</th>
+              {props.windowSize > 480 && <th scope="col" className="prices__data">Last price</th>}
+              <th scope="col" className="prices__data">24h change, %</th>
+              {props.windowSize > 480 && (
+                <th scope="col" className="prices__data">Volume, USD</th>
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {Array.from(priceData).map((item) => {
               return (
-                <ul className="prices__line" key={item.pair}>
-                  <li className="prices__data prices__data_left">
+                <tr className="prices__line" key={item.pair}>
+                  <td className="prices__data prices__data_left">
                     <Link
                       className="prices__link"
                       to={"/exchange"}
@@ -56,11 +67,13 @@ function Prices(props) {
                     >
                       {item.pair}
                     </Link>
-                  </li>
-                  <li className="prices__data">{item.bid}</li>
-                  <li className="prices__data">{item.ask}</li>
-                  <li className="prices__data">{item.last}</li>
-                  <li
+                  </td>
+                  <td className="prices__data">{item.bid}</td>
+                  <td className="prices__data">{item.ask}</td>
+                  {props.windowSize > 480 && (
+                    <td className="prices__data">{item.last}</td>
+                  )}
+                  <td
                     className={`prices__data ${
                       Number(item.percent_change_24) < 0
                         ? `prices__data_red`
@@ -68,16 +81,20 @@ function Prices(props) {
                     }`}
                   >
                     {item.percent_change_24}
-                  </li>
-                  <li className="prices__data prices__data_right">
-                    {Intl.NumberFormat("en-GB").format(
-                      Number(item.volume).toFixed(2)
-                    )}
-                  </li>
-                </ul>
+                  </td>
+                  {props.windowSize > 480 && (
+                    <td className="prices__data prices__data_right">
+                      {Intl.NumberFormat("en-GB").format(
+                        Number(item.volume).toFixed(2)
+                      )}
+                    </td>
+                  )}
+                </tr>
               );
-            })
-          : <Loader/>}
+            })}
+          </tbody>
+        </table>
+      )}
       </div>
     </section>
   );

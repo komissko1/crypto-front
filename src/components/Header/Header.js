@@ -6,19 +6,6 @@ import logoPath from "../../images/logo.png";
 import navButton from "../../images/navTabButton.svg";
 
 function Header(props) {
-  const [windowSize, setwindowSize] = React.useState(window.innerWidth);
-
-  React.useEffect(() => {
-    var resizeTimer;
-    window.onresize = function () {
-      if (resizeTimer) {
-        clearTimeout(resizeTimer);
-      }
-      resizeTimer = setTimeout(function () {
-        setwindowSize(window.innerWidth);
-      }, 200);
-    };
-  }, [windowSize]);
 
   return (
     <header className="header">
@@ -26,7 +13,7 @@ function Header(props) {
         <img className="header__logo" src={logoPath} alt="Logo" />
       </Link>
       <div className="header__links-container">
-        {windowSize <= 768 ? (
+        {props.windowSize <= 768 ? (
           <>
             <span></span>
             <span></span>

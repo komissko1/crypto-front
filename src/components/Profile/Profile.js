@@ -69,7 +69,7 @@ function Profile(props) {
           </label>
           <span
             className={`form__input-alert ${
-              validatedFields.name ? "" : "form__input-alert_pink"
+              validatedFields.name ? "" : "form__input-alert_orange"
             }`}
             id="name-alert"
           >
@@ -90,7 +90,7 @@ function Profile(props) {
           </label>
           <span
             className={`form__input-alert ${
-              validatedFields.email ? "" : "form__input-alert_pink"
+              validatedFields.email ? "" : "form__input-alert_orange"
             }`}
             id="email-alert"
           >

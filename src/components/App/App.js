@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+//Когда нет бека, токенчек делает ошибку.
 
 // Components import
 import Header from "../Header/Header";
@@ -42,11 +43,12 @@ function App() {
   const [isTransactionSubmitError, setIsTransactionSubmitError] =
     React.useState(false);
   const [isRateError, setIsRateError] = React.useState(false);
+  const [windowSize, setwindowSize] = React.useState(window.innerWidth);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Burger menu open and close event processors
+  // Burger menu open and close states
   function handleMenuClick() {
     setPopupMenuState(!popupMenuState);
   }
@@ -54,6 +56,19 @@ function App() {
   function closePopup() {
     setPopupMenuState(!popupMenuState);
   }
+
+  // Window resize tracking to implement in Header and Prices
+    React.useEffect(() => {
+      var resizeTimer;
+      window.onresize = function () {
+        if (resizeTimer) {
+          clearTimeout(resizeTimer);
+        }
+        resizeTimer = setTimeout(function () {
+          setwindowSize(window.innerWidth);
+        }, 200);
+      };
+    }, [windowSize]);
 
   // Tocken check upon site opening
   React.useEffect(() => {
@@ -136,7 +151,7 @@ function App() {
       );
       return data.last;
     } catch {
-      return console.log("No tickers received");
+      return setIsRateError(true);
     }
   }
 
@@ -157,6 +172,7 @@ function App() {
           loggedIn={isLoggedIn}
           onClick={handleMenuClick}
           onLogout={handleLogout}
+          windowSize={windowSize}
         />
         <Routes>
           <Route
@@ -171,7 +187,7 @@ function App() {
             path="/prices"
             element={
               <>
-                <Prices onPairClick={setExchangePair} />
+                <Prices onPairClick={setExchangePair} windowSize={windowSize}/>
               </>
             }
           />

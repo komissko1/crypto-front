@@ -13,7 +13,7 @@ function UserStats(props) {
 
   React.useEffect(() => {
     setUserStats({
-      accountDate: Intl.DateTimeFormat("en-US", {
+      accountDate: Intl.DateTimeFormat("en-Uk", {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -39,7 +39,7 @@ function UserStats(props) {
       <div className="stats__data">
         <p className="stats__text">
           <span className="stats__text stats__text_grey">
-            Account creation date:&nbsp;
+            Registration date:&nbsp;
           </span>
           {userStats.accountDate}
         </p>
@@ -51,7 +51,7 @@ function UserStats(props) {
         </p>
         <p className="stats__text">
           <span className="stats__text stats__text_grey">
-            Total number of transactions:&nbsp;
+            Total transactions:&nbsp;
           </span>
           {userStats.transactions}
         </p>
