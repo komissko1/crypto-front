@@ -1,5 +1,5 @@
 const apiConfig = {
-  baseUrl: "https://evening-wave-71976.herokuapp.com/"
+  baseUrl: "https://evening-wave-71976.herokuapp.com"
 };
 
 class Api {
