@@ -1,5 +1,5 @@
 const apiConfig = {
-  baseUrl: 'http://localhost:3002/bitstamp/',
+  baseUrl: 'https://evening-wave-71976.herokuapp.com/bitstamp/',
 };
 
 class BitstampApi {
