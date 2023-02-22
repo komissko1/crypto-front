@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/crypto-front/static/css/main.6283f372.css",
-    "main.js": "/crypto-front/static/js/main.c710eb1b.js",
+    "main.js": "/crypto-front/static/js/main.b8431246.js",
     "static/js/787.2145a045.chunk.js": "/crypto-front/static/js/787.2145a045.chunk.js",
     "static/media/Inter-Medium.woff": "/crypto-front/static/media/Inter-Medium.44e343ff76a98508d309.woff",
     "static/media/ecosystem.jpg": "/crypto-front/static/media/ecosystem.9292af2d9826e57e2fbf.jpg",
@@ -25,11 +25,11 @@
     "static/media/closeIcon.svg": "/crypto-front/static/media/closeIcon.53225a0040ede19319743458036d2150.svg",
     "static/media/search.svg": "/crypto-front/static/media/search.2f68ccda21d1e4407c50.svg",
     "main.6283f372.css.map": "/crypto-front/static/css/main.6283f372.css.map",
-    "main.c710eb1b.js.map": "/crypto-front/static/js/main.c710eb1b.js.map",
+    "main.b8431246.js.map": "/crypto-front/static/js/main.b8431246.js.map",
     "787.2145a045.chunk.js.map": "/crypto-front/static/js/787.2145a045.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6283f372.css",
-    "static/js/main.c710eb1b.js"
+    "static/js/main.b8431246.js"
   ]
 }
