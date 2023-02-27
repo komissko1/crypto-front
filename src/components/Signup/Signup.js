@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Form from "../Form/Form";
+import InfoPopup from "../InfoPopup/InfoPopup";
 import { alertText } from "../../utils/content";
 
 function Signup(props) {
@@ -38,6 +39,14 @@ function Signup(props) {
   };
 
   return (
+    <>
+    {props.infoPopupState.isError && (
+        <InfoPopup
+          message={alertText.serverError}
+          imgType={false}
+          onClose={props.onInfoPopupClose}
+        />
+      ) }
     <div className="signup">
       <p className="signup__title">Register and trade!</p>
       <Form
@@ -108,13 +117,6 @@ function Signup(props) {
             {alertText.password}
           </span>
         </label>
-        <p
-          className={`form__submit-alert ${
-            props.onSignupError ? "form__submit-alert_active" : ""
-          }`}
-        >
-          {alertText.serverError}
-        </p>
       </Form>
       <p className="form__bottom-text">
         Already registered?&nbsp;
@@ -123,6 +125,7 @@ function Signup(props) {
         </Link>
       </p>
     </div>
+    </>
   );
 }
 

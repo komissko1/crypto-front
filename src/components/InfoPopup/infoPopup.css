@@ -1,0 +1,76 @@
+.infoPopup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.infoPopup__container {
+  width: 320px;
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--back-color);
+  border: 1px solid var(--basic-grey);
+  box-shadow: rgb(0 0 0 / 24%) 12px 16px 24px, rgb(0 0 0 / 24%) 12px 8px 12px,
+  rgb(0 0 0 / 32%) 4px 4px 8px;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.infoPopup__close-button {
+  margin: 0;
+  padding: 0;
+  width: 2rem;
+  object-fit: cover;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.infoPopup__icon {
+  margin: 26px auto 32px;
+  width: 120px;
+  max-height: 120vh;
+  max-width: 120vw;
+  object-fit: cover;
+  align-self: center;
+}
+
+.infoPopup__message {
+  margin: 0;
+  padding: 0;
+  color: var(--brand-pink);
+  text-align: center;
+}
+
+.infoPopup__message_orange {
+  color: var(--brand-yellow);
+}
+
+.infoPopup__button {
+  margin: 1rem 0 0;
+  width: 100%;
+  line-height: 3rem;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  box-shadow: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  border: 1px solid var(--basic-grey);
+  color: var(--input-alert);
+  background-color: var(--form-background);
+  transition: opacity 0.3s ease-in-out;
+}

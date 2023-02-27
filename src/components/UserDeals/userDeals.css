@@ -1,18 +1,17 @@
 .deals {
+  min-height: 20vw;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   flex: auto;
   border-radius: 1rem;
-  border: 1px solid var(--basic-grey);
+  border: 2px solid var(--basic-grey);
   overflow: hidden auto;
   position: relative;
   overflow-x: auto;
 }
 
 .deals__table {
-  width: 100%;
-  list-style-type: none;
   border-collapse: collapse;
 }
 
@@ -22,6 +21,7 @@
 }
 
 .deals__column-title {
+  padding-right: 0.5rem;
   font-size: 1rem;
   text-align: center;
   color: var(--brand-yellow);
@@ -29,13 +29,18 @@
 }
 
 .deals__text {
+  padding-right: 0.5rem;
   max-width: 100%;
   font-size: 1rem;
   text-align: center;
 }
 
-.deals tbody tr:nth-child(even) {
-  background-color: var(--basic-grey);
+.deals tbody tr {
+  border-top: 1px solid var(--basic-grey);
+}
+
+.deals tbody tr:first-child {
+  border-top: none
 }
 
 @media screen and (max-width: 580px) {

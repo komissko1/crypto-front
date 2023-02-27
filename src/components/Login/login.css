@@ -5,8 +5,8 @@
   flex-direction: column;
   box-sizing: border-box;
   border-radius: 1rem;
-  border: 1px solid rgb(27, 34, 54);
-  background: rgb(13, 17, 28);
+  border: 1px solid var(--input-background);
+  background: var(--form-background);
   transition: transform 250ms ease 0s;
   z-index: 1;
 }

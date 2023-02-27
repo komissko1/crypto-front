@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Form from "../Form/Form";
+import InfoPopup from "../InfoPopup/InfoPopup";
 import { alertText } from "../../utils/content";
 
 function Profile(props) {
@@ -12,7 +13,6 @@ function Profile(props) {
     email: true,
   });
   const [isFormValid, setIsFormValid] = React.useState(false);
-  const [isResultVisible, setIsResultVsisble] = React.useState(false);
   const nameRef = React.useRef();
   const emailRef = React.useRef();
 
@@ -41,18 +41,33 @@ function Profile(props) {
         name: nameRef.current.value,
         email: emailRef.current.value,
       });
-      setIsResultVsisble(true);
+      setIsFormValid(false);
     }
   };
 
   return (
-    <div className="profile">
-      <p className="profile__title">{`Hi, ${currentUser.name}!`}</p>
-      <Form
-        buttonText="Save changes"
-        onSubmit={handleSubmit}
-        isFormValid={isFormValid}
-      >
+    <>
+      {props.infoPopupState.isOpen &&
+        (props.infoPopupState.isError ? (
+          <InfoPopup
+            message={alertText.updateEror}
+            imgType={false}
+            onClose={props.onInfoPopupClose}
+          />
+        ) : (
+          <InfoPopup
+            message={alertText.profileUpdated}
+            imgType={true}
+            onClose={props.onInfoPopupClose}
+          />
+        ))}
+      <div className="profile">
+        <p className="profile__title">{`Hi, ${currentUser.name}!`}</p>
+        <Form
+          buttonText="Save changes"
+          onSubmit={handleSubmit}
+          isFormValid={isFormValid}
+        >
           <label className="form__inputs-box">
             Name
             <input
@@ -96,27 +111,19 @@ function Profile(props) {
           >
             {alertText.email}
           </span>
-          <p
-            className={`form__submit-alert ${
-              isResultVisible ? "form__submit-alert_active" : ""
-            }`}
+        </Form>
+        <p className="form__bottom-text">
+          Log out before leaving! &nbsp;
+          <Link
+            to="/logout"
+            className="form__bottom-link link-effect"
+            onClick={props.onLogout}
           >
-            {props.onUpdateError
-              ? alertText.updateEror
-              : alertText.profileUpdated}
-          </p>
-      </Form>
-      <p className="form__bottom-text">
-        Log out before leaving! &nbsp;
-      <Link
-        to="/logout"
-        className="form__bottom-link link-effect"
-        onClick={props.onLogout}
-      >
-        Log out
-      </Link>
-      </p>
-    </div>
+            Log out
+          </Link>
+        </p>
+      </div>
+    </>
   );
 }
 

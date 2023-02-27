@@ -1,5 +1,6 @@
 const apiConfig = {
   baseUrl: "https://evening-wave-71976.herokuapp.com"
+  // baseUrl: "http://localhost:3002"
 };
 
 class Api {

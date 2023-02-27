@@ -3,6 +3,8 @@ import UserData from "../UserData/UserData";
 import UserWallet from "../UserWallet/UserWallet";
 import UserStats from "../UserStats/UserStats";
 import UserDeals from "../UserDeals/UserDeals";
+import InfoPopup from "../InfoPopup/InfoPopup";
+import { alertText } from "../../utils/content";
 import { currencyList } from "../../utils/currencyList";
 import api from "../../utils/MainApi";
 
@@ -10,7 +12,7 @@ function Dashboard(props) {
   const [walletData, setWalletData] = React.useState({});
   const [transactionsData, setTransactionsData] = React.useState([]);
   const [isRetrievingData, setIsRetrievingData] = React.useState(false);
-    React.useState(false);
+  React.useState(false);
 
   async function setOwnFunds(ownFunds) {
     let ownFundsUsd = 0;
@@ -22,7 +24,7 @@ function Dashboard(props) {
         ownFundsUsd = ownFundsUsd + item.amountInUsd;
       })
     ).then((data) => data);
-    return {ownFunds, ownFundsUsd}
+    return { ownFunds, ownFundsUsd };
   }
 
   React.useEffect(() => {
@@ -42,6 +44,13 @@ function Dashboard(props) {
 
   return (
     <section className="dashboard">
+      {props.infoPopupState.isError && (
+        <InfoPopup
+          message={alertText.ratesUpdateError}
+          imgType={false}
+          onClose={props.onInfoPopupClose}
+        />
+      )}
       <div className="dashboard__section">
         <UserData></UserData>
         <UserWallet

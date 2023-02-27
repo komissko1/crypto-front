@@ -2,19 +2,17 @@ import React from "react";
 import { currencyList } from "../../utils/currencyList";
 import closeIcon from "../../images/closeIcon-grey.svg";
 
-function CurrencyPopup({ isOpen, onClose, wallet }) {
+function CurrencyPopup({ onClose, wallet }) {
 
   const searchRef = React.useRef();
-  const [searchResult, setSearchResult] = React.useState([]);
+  const [searchResult, setSearchResult] = React.useState(currencyList);
 
   React.useEffect(() => {
     searchRef.current.value = "";
-    setSearchResult(currencyList);
     handleSearch();
   }, []);
 
   React.useEffect(() => {
-    if (!isOpen) return;
     const closeByEscape = e => {
       if (e.key === "Escape") {
         onClose();
@@ -22,7 +20,7 @@ function CurrencyPopup({ isOpen, onClose, wallet }) {
     };
     document.addEventListener("keydown", closeByEscape);
     return () => document.removeEventListener("keydown", closeByEscape);
-  }, [isOpen]);
+  }, []);
 
   const handleOverlay = e => {
     if (e.target === e.currentTarget) {
@@ -45,7 +43,7 @@ function CurrencyPopup({ isOpen, onClose, wallet }) {
 
   return (
     <section
-      className={`currencyList ${isOpen ? "currencyList_opened" : ""}`}
+      className="currencyList"
       onClick={handleOverlay}
     >
       <dir className="currencyList__container">

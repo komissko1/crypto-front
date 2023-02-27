@@ -50,6 +50,7 @@
 @import url(./components/Form/form.css);
 @import url(./components/PopupMenu/popupMenu.css);
 @import url(./components/CurrencyPopup/currencyPopup.css);
+@import url(./components/InfoPopup/infoPopup.css);
 
 @import url(./components/Loader/loader.css);
 @import url(./utils/link-effect.css);

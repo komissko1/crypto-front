@@ -24,7 +24,8 @@
 }
 
 .tickers__table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 1rem;
   z-index: 1;
 }
 

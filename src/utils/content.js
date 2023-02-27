@@ -111,7 +111,9 @@ export const alertText = {
   authorizationError: "Authorisation error",
   profileUpdated: "User's data updated",
   userExists: "User name already exists",
-  transactionError: "Transaction not processed"
+  transactionError: "Transaction not processed",
+  transactionCompleted: "Transaction successful",
+  ratesUpdateError: "Crypto Exchange is not responding"
 }
 
 // Active tickers for the Landing page

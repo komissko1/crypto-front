@@ -1,19 +1,26 @@
 .wallet {
+  min-height: 20vw;
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
   flex: auto;
   flex-direction: column;
   border-radius: 1rem;
-  border: 1px solid var(--basic-grey);
+  border: 2px solid var(--basic-grey);
   overflow: hidden auto;
+  position: relative;
+}
+
+.wallet__container {
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
 .wallet__currency {
   padding-bottom: 1rem;
   display: grid;
-  grid-template-columns: 3rem min-content;
+  grid-template-columns: 3rem auto;
   grid-template-rows: auto auto;
   grid-auto-flow: column;
 }
@@ -27,24 +34,30 @@
   font-size: 0;
 }
 
-.wallet__currency-amount {
+.wallet__text {
   margin: 0;
   padding: 0;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
   align-self: center;
   font-size: 1rem;
   color: var(--alt-grey);
 }
 
-.wallet__currency-amount_small {
+.wallet__text_small {
   font-size: 0.75rem;
   color: green;
 }
 
+.wallet__text_orange {
+  padding: 1rem 0;
+  color: var(--brand-yellow);
+}
+
 @media screen and (max-width: 580px) {
-  .wallet {
+  .wallet__container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50%, 12rem));
   }

@@ -1,9 +1,10 @@
 .stats {
   padding: 1rem;
   display: flex;
+  justify-content: space-between;
   box-sizing: border-box;
   border-radius: 1rem;
-  border: 1px solid var(--basic-grey);
+  border: 2px solid var(--basic-grey);
 }
 
 .stats__data {
@@ -16,6 +17,8 @@
   font-size: 1rem;
   line-height: 1.5rem;
   list-style-type: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stats__text_grey {
@@ -24,8 +27,8 @@
 
 .stats__text_large {
   color: var(--brand-yellow);
-  font-size: var(--subtitle-font-size);
-  line-height: var(--title-font-size);
+  font-size: var(--paragraph-font-size);
+  line-height: var(--subtitle-font-size);
 }
 
 .stats__text_pink {
@@ -33,11 +36,14 @@
 }
 
 .stats__profit {
-  margin: 0 auto;
+  flex: auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 410px) {

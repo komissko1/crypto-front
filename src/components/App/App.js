@@ -1,8 +1,7 @@
 import React from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-//Когда нет бека, токенчек делает ошибку.
 
-// Components import
+// Import Components
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
@@ -37,12 +36,10 @@ function App() {
     name1: "USDT",
     name2: "BTC",
   });
-  const [isLoginError, setIsLoginError] = React.useState(false);
-  const [isSignupError, setIsSignupError] = React.useState(false);
-  const [isProfileUpdateError, setIsProfileUpdateError] = React.useState(false);
-  const [isTransactionSubmitError, setIsTransactionSubmitError] =
-    React.useState(false);
-  const [isRateError, setIsRateError] = React.useState(false);
+  const [infoPopupState, setInfoPopupState] = React.useState({
+    isOpen: false,
+    isError: false,
+  });
   const [windowSize, setwindowSize] = React.useState(window.innerWidth);
 
   const location = useLocation();
@@ -58,17 +55,17 @@ function App() {
   }
 
   // Window resize tracking to implement in Header and Prices
-    React.useEffect(() => {
-      var resizeTimer;
-      window.onresize = function () {
-        if (resizeTimer) {
-          clearTimeout(resizeTimer);
-        }
-        resizeTimer = setTimeout(function () {
-          setwindowSize(window.innerWidth);
-        }, 200);
-      };
-    }, [windowSize]);
+  React.useEffect(() => {
+    var resizeTimer;
+    window.onresize = function () {
+      if (resizeTimer) {
+        clearTimeout(resizeTimer);
+      }
+      resizeTimer = setTimeout(function () {
+        setwindowSize(window.innerWidth);
+      }, 200);
+    };
+  }, [windowSize]);
 
   // Tocken check upon site opening
   React.useEffect(() => {
@@ -76,16 +73,19 @@ function App() {
   }, []);
 
   const handleTockenCheck = (path) => {
-    if (localStorage.getItem("jwt")) {
-      auth.getToken().then((res) => {
+    auth
+      .getToken()
+      .then((res) => {
         if (res.user) {
           setCurrentUser(res.user);
           setCurrentWallet(res.wallet);
           setIsLoggedIn(true);
           path === ("/login" || "/signup") ? navigate("/") : navigate(path);
+        } else {
+          console.log(res.message);
         }
-      });
-    }
+      })
+      .catch((err) => console.log(err));
   };
 
   // Signup, login and logout methods call
@@ -97,20 +97,19 @@ function App() {
           handleLogin({ email, password });
         }
       })
-      .catch(() => setIsSignupError(true));
+      .catch(() => setInfoPopupState({ isOpen: true, isError: true }));
   };
 
   const handleLogin = ({ email, password }) => {
     auth
       .authorize(email, password)
       .then((res) => {
-        localStorage.setItem("jwt", res.user._id);
         setCurrentUser(res.user);
         setCurrentWallet(res.wallet);
         setIsLoggedIn(true);
         navigate("/dashboard");
       })
-      .catch(() => setIsLoginError(true));
+      .catch(() => setInfoPopupState({ isOpen: true, isError: true }));
   };
 
   const handleLogout = () => {
@@ -119,13 +118,12 @@ function App() {
       .then((res) => {
         if (res) {
           navigate("/");
-          localStorage.clear();
           setCurrentUser({});
           setCurrentWallet({});
           setIsLoggedIn(false);
         }
       })
-      .catch(() => setIsLoginError(true));
+      .catch(() => setInfoPopupState({ isOpen: true, isError: true }));
   };
 
   // User update methods call
@@ -134,8 +132,9 @@ function App() {
       .patchUserData({ name, email })
       .then((userData) => {
         setCurrentUser(userData);
+        setInfoPopupState({ isOpen: true, isError: false });
       })
-      .catch(() => setIsProfileUpdateError(true));
+      .catch(() => setInfoPopupState({ isOpen: true, isError: true }));
   }
 
   // Setting currency pair for Exchange page
@@ -151,17 +150,29 @@ function App() {
       );
       return data.last;
     } catch {
-      return setIsRateError(true);
+      return setInfoPopupState({ isOpen: false, isError: true });
     }
   }
 
   // Transaction submit. Feedback is an updated wallet.
   async function handleTransactionSubmit(data) {
     try {
-      const wallet = await api.postTransaction(data);
-      return setCurrentWallet(wallet);
+      const response = await api.postTransaction(data);
+      setInfoPopupState({ isOpen: true, isError: false });
+      return setCurrentWallet(response.wallet);
     } catch {
-      return setIsTransactionSubmitError(true);
+      return setInfoPopupState({ isOpen: true, isError: true });
+    }
+  }
+
+  // Handle InfoPopup close and clean errors
+  function infoPopupClose(e) {
+    if (
+      e.target === e.currentTarget ||
+      e.target.id === "infoPopupButton" ||
+      e.key === "Escape"
+    ) {
+      setInfoPopupState({ isOpen: false, isError: false });
     }
   }
 
@@ -187,7 +198,7 @@ function App() {
             path="/prices"
             element={
               <>
-                <Prices onPairClick={setExchangePair} windowSize={windowSize}/>
+                <Prices onPairClick={setExchangePair} windowSize={windowSize} />
               </>
             }
           />
@@ -202,7 +213,8 @@ function App() {
                   getRate={getRate}
                   wallet={currentWallet}
                   onTransactionSubmit={handleTransactionSubmit}
-                  onTransactionSubmitError={isTransactionSubmitError}
+                  infoPopupState={infoPopupState}
+                  onInfoPopupClose={infoPopupClose}
                 />
               </>
             }
@@ -214,7 +226,8 @@ function App() {
                 <Dashboard
                   wallet={currentWallet}
                   getRate={getRate}
-                  isRateError={isRateError}
+                  infoPopupState={infoPopupState}
+                  onInfoPopupClose={infoPopupClose}
                 />
               </ProtectedRoute>
             }
@@ -223,7 +236,11 @@ function App() {
             path="/login"
             element={
               <ProtectedRoute loggedIn={!isLoggedIn}>
-                <Login onLogin={handleLogin} onLoginError={isLoginError} />
+                <Login
+                  onLogin={handleLogin}
+                  infoPopupState={infoPopupState}
+                  onInfoPopupClose={infoPopupClose}
+                />
               </ProtectedRoute>
             }
           />
@@ -231,7 +248,11 @@ function App() {
             path="/signup"
             element={
               <ProtectedRoute loggedIn={!isLoggedIn}>
-                <Signup onSignup={handleSignup} onSignupError={isSignupError} />
+                <Signup
+                  onSignup={handleSignup}
+                  infoPopupState={infoPopupState}
+                  onInfoPopupClose={infoPopupClose}
+                />
               </ProtectedRoute>
             }
           />
@@ -242,7 +263,8 @@ function App() {
                 <Profile
                   onLogout={handleLogout}
                   onUserUpdate={handleUpdateUser}
-                  onUpdateError={isProfileUpdateError}
+                  infoPopupState={infoPopupState}
+                  onInfoPopupClose={infoPopupClose}
                 />
               </ProtectedRoute>
             }

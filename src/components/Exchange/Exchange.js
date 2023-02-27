@@ -7,22 +7,22 @@ function Exchange(props) {
   // State for currency selection popup.
   // It contains the open/close state and the id name of the currency selection button,
   // which initiated currency selection popup opening
-  const [popupState, setPopupState] = React.useState({
+  const [сurrenciesPopupState, setCurrenciesPopupState] = React.useState({
     isOpen: false,
     cur: ""
   });
 
-  const openPopup = e => {
-    setPopupState({ isOpen: true, cur: e.target.id });
+  const openCurrenciesPopup = e => {
+    setCurrenciesPopupState({ isOpen: true, cur: e.target.id });
   };
 
-  const closePopup = selectedCurrency => {
-    if (selectedCurrency && popupState.cur) {
-      popupState.cur === "cur1"
+  const closeCurrenciesPopup = selectedCurrency => {
+    if (selectedCurrency && сurrenciesPopupState.cur) {
+      сurrenciesPopupState.cur === "cur1"
         ? props.onPairChange([selectedCurrency, props.activePair.name2])
         : props.onPairChange([props.activePair.name1, selectedCurrency]);
     }
-    setPopupState({ isOpen: false, cur: "" });
+    setCurrenciesPopupState({ isOpen: false, cur: "" });
   };
 
   return (
@@ -32,9 +32,10 @@ function Exchange(props) {
         onPairChange={props.onPairChange}
         getRate={props.getRate}
         wallet={props.wallet}
-        openPopup={openPopup}
+        openCurrenciesPopup={openCurrenciesPopup}
+        infoPopupState={props.infoPopupState}
+        onInfoPopupClose={props.onInfoPopupClose}
         onTransactionSubmit={props.onTransactionSubmit}
-        onTransactionSubmitError={props.onTransactionSubmitError}
       />
       {!props.loggedIn && (
         <div className="exchange__login-section">
@@ -46,7 +47,7 @@ function Exchange(props) {
           </Link>
         </div>
       )}
-      <CurrencyPopup isOpen={popupState.isOpen} onClose={closePopup} wallet={props.wallet}/>
+      {сurrenciesPopupState.isOpen && <CurrencyPopup onClose={closeCurrenciesPopup} wallet={props.wallet}/>}
     </div>
   );
 }
