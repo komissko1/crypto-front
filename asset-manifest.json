@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/crypto-front/static/css/main.6283f372.css",
-    "main.js": "/crypto-front/static/js/main.38c262ab.js",
+    "main.css": "/crypto-front/static/css/main.a40d3c09.css",
+    "main.js": "/crypto-front/static/js/main.5cf68ca6.js",
     "static/js/787.2145a045.chunk.js": "/crypto-front/static/js/787.2145a045.chunk.js",
     "static/media/Inter-Medium.woff": "/crypto-front/static/media/Inter-Medium.44e343ff76a98508d309.woff",
     "static/media/ecosystem.jpg": "/crypto-front/static/media/ecosystem.9292af2d9826e57e2fbf.jpg",
@@ -17,19 +17,21 @@
     "static/media/TwitterLogo.svg": "/crypto-front/static/media/TwitterLogo.d202e736bf52b2f79944211cfb9b42a1.svg",
     "static/media/TelegramLogo.svg": "/crypto-front/static/media/TelegramLogo.ff6639d0ace6826bab45e866b5b22e45.svg",
     "static/media/FacebookLogo.svg": "/crypto-front/static/media/FacebookLogo.66e0fb369718c2f02bfe655340f30918.svg",
+    "static/media/noIcon.svg": "/crypto-front/static/media/noIcon.d384c90498b5d9dad39d8ccab989a3d9.svg",
     "static/media/loader.svg": "/crypto-front/static/media/loader.f509407383ea5ee2353e869b3dc2b9c6.svg",
     "index.html": "/crypto-front/index.html",
     "static/media/account.svg": "/crypto-front/static/media/account.a80c98f47813ebb78e81ef58781f9620.svg",
+    "static/media/yesIcon.svg": "/crypto-front/static/media/yesIcon.740043127121ccca713fa905ab355331.svg",
     "static/media/navTabButton.svg": "/crypto-front/static/media/navTabButton.4a6ca5394ebf57b8bcf5324a7b07444d.svg",
     "static/media/closeIcon-grey.svg": "/crypto-front/static/media/closeIcon-grey.ac0095b77ba20753e708f297eae8f796.svg",
     "static/media/closeIcon.svg": "/crypto-front/static/media/closeIcon.53225a0040ede19319743458036d2150.svg",
     "static/media/search.svg": "/crypto-front/static/media/search.2f68ccda21d1e4407c50.svg",
-    "main.6283f372.css.map": "/crypto-front/static/css/main.6283f372.css.map",
-    "main.38c262ab.js.map": "/crypto-front/static/js/main.38c262ab.js.map",
+    "main.a40d3c09.css.map": "/crypto-front/static/css/main.a40d3c09.css.map",
+    "main.5cf68ca6.js.map": "/crypto-front/static/js/main.5cf68ca6.js.map",
     "787.2145a045.chunk.js.map": "/crypto-front/static/js/787.2145a045.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6283f372.css",
-    "static/js/main.38c262ab.js"
+    "static/css/main.a40d3c09.css",
+    "static/js/main.5cf68ca6.js"
   ]
 }
