@@ -38,7 +38,7 @@ function Login(props) {
     <>
       {props.infoPopupState.isError && (
         <InfoPopup
-          message={alertText.serverError}
+          message={alertText.userNotFound}
           imgType={false}
           onClose={props.onInfoPopupClose}
         />

@@ -104,10 +104,14 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        setCurrentUser(res.user);
-        setCurrentWallet(res.wallet);
-        setIsLoggedIn(true);
-        navigate("/dashboard");
+        if (res) {
+          setCurrentUser(res.user);
+          setCurrentWallet(res.wallet);
+          setIsLoggedIn(true);
+          navigate("/dashboard");
+        } else {
+          setInfoPopupState({ isOpen: true, isError: true });
+        }
       })
       .catch(() => setInfoPopupState({ isOpen: true, isError: true }));
   };

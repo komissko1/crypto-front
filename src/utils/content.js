@@ -106,6 +106,7 @@ export const alertText = {
   name: "Value has to be from 3 to 50 symbols long",
   email: "Not an e-mail",
   password: "Only figures, letters and special symbols allowed",
+  userNotFound: "User not found",
   serverError: "Server error",
   updateEror: "Update error",
   authorizationError: "Authorisation error",
