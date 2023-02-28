@@ -4,6 +4,10 @@ import redditLogo from "../images/RedditLogo.svg";
 import facebookLogo from "../images/FacebookLogo.svg";
 import telegramLogo from "../images/TelegramLogo.svg";
 
+// Backend URL
+// export const baseUrl = "https://evening-wave-71976.herokuapp.com";
+export const baseUrl = "http://localhost:3002";
+
 //Landing page data
 export const community = [
   {

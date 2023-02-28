@@ -1,11 +1,12 @@
+import { baseUrl } from "./content";
+
 const apiConfig = {
-  baseUrl: 'https://evening-wave-71976.herokuapp.com/bitstamp/',
-  // baseUrl: 'http://localhost:3002/bitstamp/',
+  baseUrl: baseUrl,
 };
 
 class BitstampApi {
   constructor(apiConfig) {
-    this._baseUrl = apiConfig.baseUrl;
+    this._baseUrl = `${apiConfig.baseUrl}/bitstamp/`;
   }
 
   _checkResponse(res) {

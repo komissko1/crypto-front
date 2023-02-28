@@ -1,5 +1,6 @@
-// export const BASE_URL = "http://localhost:3002";
-export const BASE_URL = 'https://evening-wave-71976.herokuapp.com';
+import { baseUrl } from "./content";
+
+export const BASE_URL = baseUrl;
 
 export const register = ({ name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
