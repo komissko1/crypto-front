@@ -34,6 +34,7 @@ function UserStats(props) {
     });
   }, [props, currentUser]);
 
+
   return (
     <div className="stats">
       <div className="stats__data">
@@ -66,7 +67,7 @@ function UserStats(props) {
         <p className="stats__text stats__text_grey">Your profit</p>
         <p
           className={`stats__text stats__text_large ${
-            userStats.profit < 0 && "stats__text_pink"
+            (props.totalFunds < 10000) && "stats__text_pink"
           }`}
         >
           {userStats.profit}
