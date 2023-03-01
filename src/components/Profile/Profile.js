@@ -75,7 +75,7 @@ function Profile(props) {
               type="text"
               id="name"
               minLength="3"
-              maxLength="50"
+              maxLength="30"
               placeholder="name"
               required
               ref={nameRef}
@@ -84,7 +84,7 @@ function Profile(props) {
           </label>
           <span
             className={`form__input-alert ${
-              validatedFields.name ? "" : "form__input-alert_orange"
+              validatedFields.name ? "" : "form__input-alert_pink"
             }`}
             id="name-alert"
           >
@@ -105,7 +105,7 @@ function Profile(props) {
           </label>
           <span
             className={`form__input-alert ${
-              validatedFields.email ? "" : "form__input-alert_orange"
+              validatedFields.email ? "" : "form__input-alert_pink"
             }`}
             id="email-alert"
           >

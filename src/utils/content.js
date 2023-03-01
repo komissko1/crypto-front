@@ -5,8 +5,8 @@ import facebookLogo from "../images/FacebookLogo.svg";
 import telegramLogo from "../images/TelegramLogo.svg";
 
 // Backend URL
-export const baseUrl = "https://evening-wave-71976.herokuapp.com";
-// export const baseUrl = "http://localhost:3002";
+// export const baseUrl = "https://evening-wave-71976.herokuapp.com";
+export const baseUrl = "http://localhost:3002";
 
 //Landing page data
 export const community = [
@@ -107,7 +107,7 @@ export const footerNavBar = [
 
 export const alertText = {
   searchIsEmpty: "Please, enter the value",
-  name: "Value has to be from 3 to 50 symbols long",
+  name: "Value has to be from 3 to 30 symbols long",
   email: "Not an e-mail",
   password: "Only figures, letters and special symbols allowed",
   userNotFound: "User not found",
